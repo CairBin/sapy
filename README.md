@@ -4,3 +4,18 @@
 
 Sapy is a collection of C++ libraries that are as "simple as Python".
 
+
+## Build 
+
+**Default Build (Release):**
+
+```sh
+./build.sh  # Builds the project in Release mode
+```
+
+**Debug Build:**
+
+```sh
+./build.sh Debug  # Builds the project in Debug mode
+```
+
