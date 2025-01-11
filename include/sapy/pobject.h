@@ -1,0 +1,27 @@
+#pragma once
+
+#include <ostream>
+
+namespace sapy{
+
+class PString;
+
+class PObject{
+public:
+    PObject(){}
+    virtual ~PObject() {}
+
+    virtual PString toString() const = 0;
+private:  
+    virtual void _print(std::ostream& os) const = 0;
+    friend std::ostream& operator<<(std::ostream& os, const PObject& obj);
+};
+
+std::ostream& operator<<(std::ostream& os, const PObject& obj) {
+    obj._print(os);
+    return os;
+}
+
+
+
+}

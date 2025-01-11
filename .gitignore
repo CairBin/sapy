@@ -1,0 +1,14 @@
+*
+*.*
+!LICENSE
+!README.md
+!/src/
+!/include/
+!/include/sapy
+!/test/
+!*.cpp
+!*.h
+!*.hpp
+!*.cc
+!CMakeLists.txt
+!.gitignore
