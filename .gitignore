@@ -12,3 +12,4 @@
 !*.cc
 !CMakeLists.txt
 !.gitignore
+!conanfile.txt
