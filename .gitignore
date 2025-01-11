@@ -13,3 +13,4 @@
 !CMakeLists.txt
 !.gitignore
 !conanfile.txt
+!build.sh
