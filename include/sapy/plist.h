@@ -1,9 +1,9 @@
-#include <sapy/pobject.h>
+#include "sapy/pobject.h"
+#include "sapy/pstring.h"
 #include <vector>
 #include <memory>
 
 namespace sapy{
-class PString;
 
 class PList : public PObject{
 public:
@@ -20,17 +20,7 @@ public:
     PList& operator=(PList&&) noexcept = default;
 
 
-    PString toString() const override{
-        PString str = "[";
-        for(size_t i = 0; i < _data.size(); i++){
-            str = str + _data[i]->toString();
-            if(i != _data.size() - 1){
-                str = str +  ", ";
-            }
-        }
-        str = str + "]";
-        return str;
-    }
+    PString toString() const override;
 
     PList* _clone() const override {
         return new PList(*this);

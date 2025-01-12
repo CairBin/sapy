@@ -3,9 +3,6 @@
 #include "sapy/plist.h"
 namespace sapy{
 
-int PString::toInt(){
-    return std::stoi(toStdString());
-}
 
 
 PList PString::split(const PString& delimiter) const{
@@ -19,6 +16,23 @@ PList PString::split(const PString& delimiter) const{
     result.append(PString(_data.substr(prevPos)));
     return result;
 }
+
+PString PString::lower() const{
+    std::u32string lowerStr;
+    for(auto c : _data){
+        lowerStr.push_back(std::towlower(c));
+    }
+    return PString(lowerStr);
+}
+
+PString PString::upper() const{
+    std::u32string upperStr;
+    for(auto c : _data){
+        upperStr.push_back(std::towupper(c));
+    }
+    return PString(upperStr);
+}
+
 
 }
 

@@ -1,6 +1,6 @@
 #pragma once 
 
-#include <sapy/pobject.h>
+#include "sapy/pobject.h"
 #include <vector>
 #include <cstdint>
 #include <string>
@@ -8,23 +8,21 @@
 #include <locale>
 #include <stdexcept>
 
-
 namespace sapy{
 class PList;
 class PString : public PObject{
 public:
     
     PString() {}
-    // PString(PString&& other) noexcept : _data(std::move(other._data)){}
     PString(const PString&) = default;
     PString(const char* str) {
         _data = fromUTF8ToUTF32(std::string(str));    
     }
     PString(const std::u32string& str) : _data(str) {}
-
     PString(const std::string& str){
         _data = fromUTF8ToUTF32(str);
     }
+
     virtual ~PString(){}
 
     virtual PString toString() const override{
@@ -39,23 +37,13 @@ public:
         return fromUTF32ToUTF8(_data);;
     }
     
-    PString lower() const{
-        std::u32string lowerStr;
-        for(auto c : _data){
-            lowerStr.push_back(std::towlower(c));
-        }
-        return PString(lowerStr);
-    }
+    PString lower() const;
+    PString upper() const;
+    PList split(const PString& delimiter)const;
 
-    PString upper() const{
-        std::u32string upperStr;
-        for(auto c : _data){
-            upperStr.push_back(std::towupper(c));
-        }
-        return PString(upperStr);
+    int toInt(){
+        return std::stoi(toStdString());
     }
-
-    
 
     size_t length() const{
         return _data.length();
@@ -69,9 +57,6 @@ public:
         return _data.rfind(other._data) == _data.length() - other._data.length();
     }
 
-    PList split(const PString& delimiter)const;
-    int toInt();  
-    
     bool operator==(const PString& other) const {
         return _data == other._data;
     }
@@ -116,7 +101,6 @@ private:
     virtual void _print(std::ostream& os) const override{
         os << toStdString();
     }
-    //std::string str;
     std::u32string _data;
 };
 }
