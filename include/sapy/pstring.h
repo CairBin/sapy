@@ -64,8 +64,9 @@ public:
     bool operator!=(const PString& other) const {
         return !(*this == other);
     }
-    char32_t operator[](size_t index) const {
-        return _data[index];
+    PString operator[](size_t index) const {
+        std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> convert;
+        return PString(convert.to_bytes(_data[index]));
     }
 
     PString operator+(const PString& other) const {
