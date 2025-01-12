@@ -3,6 +3,7 @@
 !LICENSE
 !README.md
 !/src/
+!/bench/
 !/include/
 !/include/sapy
 !/test/
