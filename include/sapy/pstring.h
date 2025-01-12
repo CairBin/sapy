@@ -104,4 +104,15 @@ private:
     }
     std::u32string _data;
 };
+
+
+inline PString operator+(const char* lhs, const PString& rhs) {
+    return PString(lhs) + rhs;  
+}
+
+inline PString operator+(const std::string& lhs, const PString& rhs) {
+    return PString(lhs) + rhs;  
+}
+
+
 }

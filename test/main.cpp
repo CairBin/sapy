@@ -17,6 +17,13 @@ int main(){
     PString str2("123");
     cout << str2.toInt() << endl;
 
+    PString str_opt; 
+    str_opt = str + str2 + "abc";
+    str_opt = "abc" + str_opt;
+    str_opt = string("std_String") + str_opt;
+    cout << str_opt << endl;
+
+
     PString str_chinese = "你好，世界！";
     for(size_t i = 0; i < str_chinese.length(); i++){
         cout << str_chinese.toString() +"[" + std::to_string(i) + "] = " + str_chinese[i] << endl;
