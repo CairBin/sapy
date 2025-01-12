@@ -1,55 +1,77 @@
-#include "sapy/pobject.h"
-#include "sapy/pstring.h"
-#include <vector>
+#include <iostream>
 #include <memory>
+#include <string>
+#include <vector>
+#include <type_traits> // std::is_arithmetic_v
+#include <utility>     // std::move
+#include "sapy/pstring.h"
 
 namespace sapy{
 
-class PList : public PObject{
+template <typename T>
+class PListModel : public PObject {
 public:
-    PList() = default;
-    
-    // Delete copy constructor and copy assignment operator
-    PList(const PList&) {
-        throw std::runtime_error("Copy constructor not allowed");
-    };
-    PList& operator=(const PList&) = delete;
-    
-    // Allow move semantics
-    PList(PList&&) noexcept = default;
-    PList& operator=(PList&&) noexcept = default;
+    explicit PListModel(const T& val) : data_(val) {}
+    explicit PListModel(T&& val)      : data_(std::move(val)) {}
 
+    PString toString() const override {
+        if constexpr (std::is_same_v<T, const char> || 
+                          std::is_same_v<T, char>        ) {
+            return PString("\'" + std::string(1, data_) + "\'");
+        }
+        else if constexpr (std::is_arithmetic_v<T>) {
+            return PString(std::to_string(data_));
 
-    PString toString() const override;
-
-    PList* _clone() const override {
-        return new PList(*this);
-    }
-    void append(const PObject& obj) {
-        std::unique_ptr<PObject> ptr(obj._clone());
-        _data.push_back(std::move(ptr));
-    }
-    PObject& at(size_t index){
-        return *_data.at(index);
+        }
+        else if constexpr (std::is_same_v<T, std::string> || 
+                          std::is_same_v<T, const char*>  ||
+                          std::is_same_v<T, char*>        ) {
+            return PString(data_).toString();
+        }
+        else {
+            return data_.toString();
+        }
     }
 
-    size_t size() const{
-        return _data.size();
-    }
-    size_t len() const{
-        return size();
-    }
-    PObject& operator[](size_t index){
-        return at(index);
-    }
-    
-
-    
 private:
-    virtual void _print(std::ostream& os) const override{
+    void _print(std::ostream& os) const override{
         os << toString().toStdString();
     }
-    std::vector<std::unique_ptr<PObject>>_data;
+    T data_;
 };
+
+
+class PListAnyWrapper {
+public:
+    template <typename T>
+    PListAnyWrapper(T val)
+        : self_(std::make_shared<PListModel<T>>(std::move(val))) {}
+
+    PString toString() const {
+        return self_->toString();
+    }
+
+private:
+    std::shared_ptr<const PObject> self_;
+};
+
+
+class PList : public PObject {
+public:
+
+    template <typename T>
+    void append(T val) {
+        data_.emplace_back(std::move(val));
+    }
+
+    PString toString() const;
+private:
+    virtual void _print(std::ostream& os) const override{
+        os << toString();
+    }
+    std::vector<PListAnyWrapper> data_;
+};
+
+
 
 }

@@ -48,5 +48,15 @@ int main(){
     cout << str_strip_2.toString() + ".strip(\"abc\")  = " << str_strip_2.strip("abc").toString() << endl;
 
 
+    PList list2;
+    list2.append(42);               // int
+    list2.append(3.14159);          // double
+    list2.append(std::string("Hello, World!")); // std::string
+    list2.append("abc");
+    list2.append('a');
+    list2.append(PString("PString"));
+    list2.append(list);
+    cout << list2 << endl;
+
     return 0;
 }

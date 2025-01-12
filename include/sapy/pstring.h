@@ -29,10 +29,6 @@ public:
         return PString("\"") + *this + "\"";
     }
     
-    PString* _clone() const override {
-        return new PString(*this);
-    }
-
     std::string toStdString() const{
         return fromUTF32ToUTF8(_data);;
     }
@@ -60,7 +56,7 @@ public:
     PString strip(PString __strp_str = "\r\n\t ") const{
         return lstrip(__strp_str).rstrip(__strp_str);
     }  
-    
+
     bool startsWith(const PString& other) const{
         return _data.find(other._data) == 0;
     }
