@@ -58,5 +58,9 @@ int main(){
     list2.append(list);
     cout << list2 << endl;
 
+
+    PList list3;
+    list3.append(1,2,3,"Hello", "World", "!");
+    cout << list3 << endl;
     return 0;
 }

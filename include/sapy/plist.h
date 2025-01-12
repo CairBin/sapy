@@ -58,10 +58,9 @@ private:
 
 class PList : public PObject {
 public:
-
-    template <typename T>
-    void append(T val) {
-        data_.emplace_back(std::move(val));
+    template<typename... Args>
+    void append(Args&&... args) {
+    (data_.emplace_back(std::forward<Args>(args)), ...);
     }
 
     PString toString() const;
