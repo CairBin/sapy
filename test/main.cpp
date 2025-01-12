@@ -35,5 +35,18 @@ int main(){
     PString str3 = "abc:1222::3333:::";
     PList list = str3.split(":");
     cout << str3.toString() + ".split() = " << list << endl;
+
+
+    PString str_strip_before = "  \t\n\r  abc  \t\n\r  ";
+    cout << str_strip_before.toString() + ".lstrip() = " << str_strip_before.lstrip().toString() << endl;
+    cout << str_strip_before.toString() + ".rstrip() = " << str_strip_before.rstrip().toString() << endl;
+    cout << str_strip_before.toString() + ".strip()  = " << str_strip_before.strip().toString() << endl;
+
+    PString str_strip_2 = "abcaabb12345678bcaddbcabac";
+    cout << str_strip_2.toString() + ".lstrip(\"abc\") = " << str_strip_2.lstrip("abc").toString() << endl;
+    cout << str_strip_2.toString() + ".rstrip(\"abc\") = " << str_strip_2.rstrip("abc").toString() << endl;
+    cout << str_strip_2.toString() + ".strip(\"abc\")  = " << str_strip_2.strip("abc").toString() << endl;
+
+
     return 0;
 }

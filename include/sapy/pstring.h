@@ -49,6 +49,18 @@ public:
         return _data.length();
     }
 
+    PString lstrip(PString __strp_str = "\r\n\t ") const{
+        size_t pos = _data.find_first_not_of(__strp_str._data);
+        return PString(_data.substr(pos));
+    }
+    PString rstrip(PString __strp_str = "\r\n\t ") const{
+        size_t pos = _data.find_last_not_of(__strp_str._data);
+        return PString(_data.substr(0, pos + 1));
+    }
+    PString strip(PString __strp_str = "\r\n\t ") const{
+        return lstrip(__strp_str).rstrip(__strp_str);
+    }  
+    
     bool startsWith(const PString& other) const{
         return _data.find(other._data) == 0;
     }
