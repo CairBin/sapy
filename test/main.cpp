@@ -21,6 +21,9 @@ int main(){
     str_opt = str + str2 + "abc";
     str_opt = "abc" + str_opt;
     str_opt = string("std_String") + str_opt;
+    str_opt += "abc";
+    str_opt += str2;
+    str_opt += string("std_String");
     cout << str_opt << endl;
 
 

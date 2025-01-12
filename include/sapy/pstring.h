@@ -88,6 +88,10 @@ public:
         return PString(_data + fromUTF8ToUTF32(std::string(1, other)));
     }
 
+    PString operator+=(const PString& other) {
+        _data += other._data;
+        return *this;
+    }
 
     static std::u32string fromUTF8ToUTF32(const std::string& utf8Str) {
         std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
