@@ -6,4 +6,5 @@ std::ostream& operator<<(std::ostream& os, const PObject& obj) {
     obj._print(os);
     return os;
 }
+
 }
