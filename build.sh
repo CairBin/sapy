@@ -48,6 +48,6 @@ cmake ../../../../ \
 
 
 echo "Building the project..."
-cmake --build . --config ${BUILD_TYPE}
+cmake --build . --config ${BUILD_TYPE}  
 
 echo "Build completed successfully in ${BUILD_TYPE} mode."
