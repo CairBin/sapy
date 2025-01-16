@@ -110,6 +110,12 @@ public:
         std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
         return converter.to_bytes(utf32Str);
     }
+
+    size_t hash() const override {
+        std::hash<std::u32string> hasher;
+        return hasher(_data);
+    }
+
 private:
     virtual void _print(std::ostream& os) const override{
         os << toStdString();
