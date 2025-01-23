@@ -64,11 +64,13 @@ int main(){
     cout << list3 << endl;
 
     auto item1 = list3[0].unwrap<int>();
-    auto item2 = list3[1];
+    int item2 = list3[1];
+    
     cout << "item1:" << item1 << endl;
-    cout << "item2:" << item2 << endl;
+    cout << "item2:" << item2 << ", type: "<<  typeid(item2).name() << endl;
     for(size_t i = 0; i < list3.size(); i++){
-        cout << list3[i] << endl;
+        cout << list3[i];
+        cout << ", type: " << typeid(list3[i]).name() << endl;
     }
 
 
