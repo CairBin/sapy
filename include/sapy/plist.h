@@ -26,9 +26,10 @@ private:
         return true;
     }
 
-    size_t sizeImpl(){
+    size_t sizeImpl() const{
         return data_.size(); 
     }
+
 
     template <typename T>
     bool containImpl(const T &elem) const{
@@ -36,8 +37,16 @@ private:
         return res != data_.end();
     }
 
+
 public:
     PString toString() const;
+    PAnyWrapper& operator[](size_t index){
+        return data_[index];
+    }
+
+    const PAnyWrapper& operator[](size_t index) const{
+        return data_[index];
+    }
 
 private:
     virtual void _print(std::ostream& os) const override{

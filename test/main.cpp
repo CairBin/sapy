@@ -62,5 +62,15 @@ int main(){
     PList list3;
     list3.append(1,2,3,"Hello", "World", "!");
     cout << list3 << endl;
+
+    auto item1 = list3[0].unwrap<int>();
+    auto item2 = list3[1];
+    cout << "item1:" << item1 << endl;
+    cout << "item2:" << item2 << endl;
+    for(size_t i = 0; i < list3.size(); i++){
+        cout << list3[i] << endl;
+    }
+
+
     return 0;
 }

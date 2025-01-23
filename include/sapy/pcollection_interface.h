@@ -43,11 +43,11 @@ public:
 
     template<typename T>
     bool contain(const T& elem) const {
-        return static_cast<Derived *>(this)->containImpl(elem);
+        return static_cast<const Derived *>(this)->containImpl(elem);
     }
 
     size_t size() const{
-        static_cast<Derived *>(this)->sizeImpl();
+        return static_cast<const Derived *>(this)->sizeImpl();
     }
 };
 }
