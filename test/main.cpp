@@ -66,6 +66,29 @@ int main(){
     cout << str_count.toString() + ".count(\"abc\",0,8) = " << str_count.count("abc",0,8) << endl;
     cout << str_count.toString() + ".count(\"abc\",1,9) = " << str_count.count("abc",1,9) << endl;
 
+    PString fmt = "Hello, {}!";
+    cout << fmt.toString() + ".format(\"World\") = " << fmt.format("World").toString() << endl;
+
+    PString str_istitle1 = "Hello World!";
+    PString str_istitle2 = "1Cc";
+    PString str_istitle3 = "1CC";
+    PString str_istitle4 = "1cC";
+    PString str_istitle5 = "Ss Abc_cc";
+    PString str_istitle6 = "Ss Abc_Cc";
+    cout << str_istitle1.toString() + ".istitle() = " << str_istitle1.istitle() << endl;
+    cout << str_istitle2.toString() + ".istitle() = " << str_istitle2.istitle() << endl;
+    cout << str_istitle3.toString() + ".istitle() = " << str_istitle3.istitle() << endl;
+    cout << str_istitle4.toString() + ".istitle() = " << str_istitle4.istitle() << endl;
+    cout << str_istitle5.toString() + ".istitle() = " << str_istitle5.istitle() << endl;
+    cout << str_istitle6.toString() + ".istitle() = " << str_istitle6.istitle() << endl;
+
+    PString str_isupper = "_";
+    PString str_isupper2 = "你好ABC";
+    PString str_isupper3 = "你好";
+    cout << str_isupper.toString() + ".isupper() = " << str_isupper.isupper() << endl;
+    cout << str_isupper2.toString() + ".isupper() = " << str_isupper2.isupper() << endl;
+    cout << str_isupper3.toString() + ".isupper() = " << str_isupper3.isupper() << endl;
+
     PList list2;
     list2.append(42);               // int
     list2.append(3.14159);          // double

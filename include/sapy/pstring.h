@@ -8,6 +8,8 @@
 #include <locale>
 #include <stdexcept>
 #include <iostream>
+#include <format>
+#include "sapy/pbytes.h"
 namespace sapy{
 class PList;
 class PString : public PObject{
@@ -114,9 +116,143 @@ public:
         return count;
     }
 
-    // encode(const std::string& encoding="utf-8", const std::string& errors="strict") const{
+    // PBytes encode(const PString& encoding="utf-8", const PString& errors="strict") const{
+    //     // if(encoding == "utf-8"){
+    //     //     std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
+    //     // }
     //     throw std::runtime_error("Not implemented");
     // }
+
+    size_t find(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const{
+        size_t pos = _data.substr(start, end-start).find(sub._data);
+        if (pos == std::u32string::npos) return -1;
+        return pos;
+    }
+
+    template <typename... Args>
+    PString format(Args&&... args) const{
+        return PString(std::vformat(this->toStdString(), std::make_format_args(args...)));
+    }
+
+    size_t index(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const{
+        size_t pos = find(sub, start, end);
+        if (pos == -1) throw std::runtime_error("substring not found");
+        return pos;
+    }
+
+    bool isalnum() const{
+        if(_data.length() == 0) return false;
+        for(auto c : _data){
+            if (!std::iswalnum(c)) return false;
+        }
+        return true;
+    }
+
+    bool isalpha() const{
+        if(_data.length() == 0) return false;
+        for(auto c : _data){
+            if (!std::iswalpha(c)) return false;
+        }
+        return true;
+    }
+
+    bool isascii() const{
+        if(_data.length() == 0) return false;
+        for(auto c : _data){
+            if (c > 0x7f) return false;
+        }
+        return true;
+    }
+
+    bool isdecimal() const{
+        if(_data.length() == 0) return false;
+        for(auto c : _data){
+            if (!std::iswdigit(c)) return false;  // TODO
+        }
+        return true;
+    }
+
+    bool isdigit() const{
+        if(_data.length() == 0) return false;
+        for(auto c : _data){
+            if (!std::iswdigit(c)) return false;
+        }
+    }
+
+    bool isidentifier() const{
+        if(_data.length() == 0) return false;
+        if (std::iswdigit(_data[0])) return false;
+        for(auto c : _data.substr(1)){
+            if (!std::iswalnum(c) && c != '_') return false;
+        }
+        return true;
+    }
+
+    bool islower() const{
+        if(_data.length() == 0) return false;
+        bool cased = false;
+        for(auto c : _data){
+            if(std::iswalpha(c)){
+                if(!std::iswlower(c)) return false;
+                cased = true;
+            }
+        }
+        return cased;
+    }
+
+    bool isnumeric() const{
+        if(_data.length() == 0) return false;
+        for(auto c : _data){
+            if (!std::iswdigit(c)) return false;  // TODO
+        }
+        return true;
+    }
+
+    bool isprintable() const{
+        if(_data.length() == 0) return true;
+        for(auto c : _data){
+            if (!std::iswprint(c)) return false;
+        }
+        return true;
+    }
+
+    bool isspace() const{
+        if(_data.length() == 0) return false;
+        for(auto c : _data){
+            if (!std::iswspace(c)) return false;
+        }
+        return true;
+    }
+
+    bool istitle() const{
+        bool cased = false;
+        for(size_t i=0; i< _data.size(); i++){
+            if(!std::iswalpha(_data[i])){
+                cased = false;
+                continue;
+            }
+            if (std::iswupper(_data[i])){
+                if (cased) return false;
+                cased = true;
+            }
+            else if (std::iswlower(_data[i])){
+                if (!cased) return false;
+            }
+        }
+        return cased;
+    }
+
+    bool isupper() const{
+        if(_data.length() == 0) return false;
+        bool cased = false;
+        for(auto c : _data){
+            if (std::iswalpha(c)){
+                if(!std::iswupper(c)) return false;
+                cased = true;
+            }
+        }
+        return cased;
+    }
 
     bool operator==(const PString& other) const {
         return _data == other._data;
