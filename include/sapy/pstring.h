@@ -22,6 +22,9 @@ public:
     PString(const std::string& str){
         _data = fromUTF8ToUTF32(str);
     }
+    PString(const char32_t& c){
+        _data.push_back(c);
+    }
 
     virtual ~PString(){}
 
@@ -61,10 +64,24 @@ public:
         return _data.find(other._data) == 0;
     }
 
+    bool startswith(const PString& other) const{
+        return startsWith(other);
+    }
+
     bool endsWith(const PString& other) const{
         return _data.rfind(other._data) == _data.length() - other._data.length();
     }
 
+    bool endswith(const PString& other) const{
+        return endsWith(other);
+    }
+
+    PString captilize() const{
+        if (_data.length() == 0) return PString();
+        return PString(static_cast<char32_t>(std::towupper(_data[0]))) + PString(_data.substr(1)).lower();
+    }
+
+    
     bool operator==(const PString& other) const {
         return _data == other._data;
     }
@@ -101,7 +118,7 @@ public:
         return *this;
     }
     
-    PString operator+=(const char32_t& other) {
+    PString& operator+=(const char32_t& other) {
         _data += other;
         return *this;
     }

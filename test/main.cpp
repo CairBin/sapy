@@ -47,6 +47,12 @@ int main(){
     cout << str_strip_2.toString() + ".rstrip(\"abc\") = " << str_strip_2.rstrip("abc").toString() << endl;
     cout << str_strip_2.toString() + ".strip(\"abc\")  = " << str_strip_2.strip("abc").toString() << endl;
 
+    PString str_cap1 = "aBC";
+    cout << str_cap1.toString() + ".captilize() = " << str_cap1.captilize().toString() << endl;
+    PString str_cap2 = "你好";
+    cout << str_cap2.toString() + ".captilize() = " << str_cap2.captilize().toString() << endl;
+    PString str_cap3 = " aBC dfdfd";
+    cout << str_cap3.toString() + ".captilize() = " << str_cap3.captilize().toString() << endl;
 
     PList list2;
     list2.append(42);               // int
