@@ -13,7 +13,7 @@ void std_str_add_c_b(size_t){
 void pstring_add_c_b(size_t){
     sapy::PString dut;
     for(size_t i = 0; i < BENCH_SIZE; i++){
-        dut = dut + v[i];
+        dut += v[i];
     }
 }
 

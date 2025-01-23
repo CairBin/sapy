@@ -2,7 +2,7 @@
 
 #include "sapy/pstring.h"
 
-#define BENCH_SIZE 100000ul
+#define BENCH_SIZE 10000000ul
 
 using bench_dut = void(*)(size_t);
 

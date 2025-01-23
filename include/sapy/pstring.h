@@ -7,7 +7,7 @@
 #include <codecvt>
 #include <locale>
 #include <stdexcept>
-
+#include <iostream>
 namespace sapy{
 class PList;
 class PString : public PObject{
@@ -96,8 +96,23 @@ public:
         return PString(_data + fromUTF8ToUTF32(std::string(1, other)));
     }
 
-    PString operator+=(const PString& other) {
+    PString& operator+=(const PString& other) {
         _data += other._data;
+        return *this;
+    }
+    
+    PString operator+=(const char32_t& other) {
+        _data += other;
+        return *this;
+    }
+    PString& operator+=(const char* other) {
+        _data += fromUTF8ToUTF32(std::string(other));
+        return *this;
+    }
+
+    PString& operator+=(const char &other) {
+        //_data += fromUTF8ToUTF32(std::string(1, other));
+        _data += static_cast<char32_t>(other);
         return *this;
     }
 
