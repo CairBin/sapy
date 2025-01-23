@@ -47,7 +47,9 @@ public:
     const PAnyWrapper& operator[](size_t index) const{
         return data_[index];
     }
-
+    void appendSingle(const PAnyWrapper& item){
+        data_.emplace_back(item);
+    }
 private:
     virtual void _print(std::ostream& os) const override{
         os << toString();
