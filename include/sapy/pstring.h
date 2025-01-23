@@ -81,7 +81,43 @@ public:
         return PString(static_cast<char32_t>(std::towupper(_data[0]))) + PString(_data.substr(1)).lower();
     }
 
-    
+    PString caseflod() const{
+        return lower();
+    }
+
+    PString center(size_t width, char fillchar=' ') const{
+        auto fill = PString(fillchar);
+        if (width <= _data.length()) return *this;
+        size_t pad = width - _data.length();
+        size_t pad_left = pad / 2;
+        size_t pad_right = pad - pad_left;
+        return fill * pad_left + *this + fill * pad_right;
+    }
+
+    PString substr(size_t start, size_t end=std::u32string::npos) const{
+        return PString(_data.substr(start, end-start));
+    }
+
+    size_t count(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const{
+        size_t count = 0;
+        size_t pos = start;
+        std::cout << "_data = " << PString(_data) << std::endl;
+        std::cout << "sub = " << PString(sub._data) << std::endl;
+        std::cout << "start = " << start << std::endl;
+        std::cout << "end = " << end << std::endl;
+        std::cout << "_data.substr = " << PString(_data.substr(start, end-start)) << std::endl;
+        while((pos = _data.substr(start, end-start).find(sub._data, pos)) != std::u32string::npos){
+            if (pos >= end) break;
+            count++;
+            pos += sub._data.length();
+        }
+        return count;
+    }
+
+    // encode(const std::string& encoding="utf-8", const std::string& errors="strict") const{
+    //     throw std::runtime_error("Not implemented");
+    // }
+
     bool operator==(const PString& other) const {
         return _data == other._data;
     }
@@ -113,6 +149,14 @@ public:
         return PString(_data + fromUTF8ToUTF32(std::string(1, other)));
     }
 
+    PString operator*(size_t n) const {
+        std::u32string newStr;
+        for(size_t i = 0; i < n; i++){
+            newStr += _data;
+        }
+        return PString(newStr);
+    }
+
     PString& operator+=(const PString& other) {
         _data += other._data;
         return *this;
@@ -132,6 +176,17 @@ public:
         _data += static_cast<char32_t>(other);
         return *this;
     }
+
+    PString& operator*= (size_t n){
+        std::u32string newStr;
+        for(size_t i = 0; i < n; i++){
+            newStr += _data;
+        }
+        _data = newStr;
+        return *this;
+    }
+
+
 
     static std::u32string fromUTF8ToUTF32(const std::string& utf8Str) {
         std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;

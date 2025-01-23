@@ -54,6 +54,18 @@ int main(){
     PString str_cap3 = " aBC dfdfd";
     cout << str_cap3.toString() + ".captilize() = " << str_cap3.captilize().toString() << endl;
 
+    PString str_center = "abc";
+    cout << str_center.toString() + ".center(10) = " << str_center.center(10).toString() << endl;
+    cout << str_center.toString() + ".center(10, '-') = " << str_center.center(10, '-').toString() << endl;
+    cout << str_center.toString() + ".center(2, '-') = " << str_center.center(11, '-').toString() << endl;
+    cout << str_center.toString() + ".center(4, '-') = " << str_center.center(11, '-').toString() << endl;
+
+    PString str_count = "abcabcabc";
+    cout << str_count.toString() + ".count(\"abc\") = " << str_count.count("abc") << endl;
+    cout << str_count.toString() + ".count(\"abc\",0,9) = " << str_count.count("abc",0,9) << endl;
+    cout << str_count.toString() + ".count(\"abc\",0,8) = " << str_count.count("abc",0,8) << endl;
+    cout << str_count.toString() + ".count(\"abc\",1,9) = " << str_count.count("abc",1,9) << endl;
+
     PList list2;
     list2.append(42);               // int
     list2.append(3.14159);          // double
