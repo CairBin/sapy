@@ -6,6 +6,7 @@
 #include <format>
 #include "sapy/pstring.h"
 #include "sapy/plist.h"
+#include "sapy/piterator.h"
 
 using namespace sapy;
 using namespace std;
@@ -31,6 +32,10 @@ int main(){
     for(size_t i = 0; i < str_chinese.length(); i++){
         cout << str_chinese.toString() +"[" + std::to_string(i) + "] = " + str_chinese[i] << endl;
     }
+
+    // for(auto iter = str_chinese.begin(); iter != str_chinese.end(); iter++){
+    //     cout << *iter << endl;
+    // }
 
     PString str3 = "abc:1222::3333:::";
     PList list = str3.split(":");
@@ -99,6 +104,9 @@ int main(){
     list2.append(list);
     cout << list2 << endl;
 
+    for(auto iter = list2.begin(); iter != list2.end(); iter++){
+        cout << *iter << endl;
+    }
 
     PList list3;
     list3.append(1,2,3,"Hello", "World", "!");

@@ -8,7 +8,7 @@
 #include "sapy/pstring.h"
 #include "sapy/plist.h"
 #include "bench.h"
-#include "sapy/pmodel.h"
+#include "sapy/panywrapper.h"
 
 
 

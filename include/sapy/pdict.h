@@ -3,7 +3,7 @@
 #include "sapy/pobject.h"
 #include "sapy/pcollection_interface.h"
 #include "sapy/pstring.h"
-#include "sapy/pmodel.h"
+#include "sapy/panywrapper.h"
 #include <unordered_map>
 #include "sapy/putility.h"
 
