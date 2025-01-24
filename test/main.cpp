@@ -240,7 +240,13 @@ int main(){
     std::cout << dict[999] << std::endl;
     std::cout << dict[3.14159] << std::endl;
 
+    PDict dict2 = {
+        {PString("key1"), PString("value1")},
+        {PString("key2"), PString("value2")},
+        {PString("key3"), 128}
+    };
 
+    std::cout <<dict2 <<std::endl;
 
     return 0;
 }

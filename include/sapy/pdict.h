@@ -5,6 +5,7 @@
 #include "sapy/pstring.h"
 #include <unordered_map>
 #include "sapy/putility.h"
+#include <initializer_list>
 #include "sapy/piterator.h"
 #include "sapy/panywrapper.h"
 
@@ -50,6 +51,8 @@ private:
         size_t operator()(const PAnyWrapper &obj) const;
     };
 public:
+    PDict() = default;
+    PDict(std::initializer_list<std::pair<PAnyWrapper, PAnyWrapper>> init);
     virtual PString toString() const override;
     PAnyWrapper& operator[](const PAnyWrapper& key);
     const PAnyWrapper& operator[](const PAnyWrapper& key) const;

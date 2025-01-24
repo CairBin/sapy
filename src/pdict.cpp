@@ -2,6 +2,12 @@
 
 namespace sapy{
 
+PDict::PDict(std::initializer_list<std::pair<PAnyWrapper, PAnyWrapper>> init) {
+    for (const auto& pair : init) {
+        container_[pair.first] = pair.second;
+    }
+}
+
 PString PDict::toString() const {
     PString result = "{";
     for(auto it = container_.begin(); it != container_.end(); it++){
