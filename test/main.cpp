@@ -191,6 +191,8 @@ int main(){
     PString str_modify = "abc";
     str_modify[0] = '1';
     str_modify[1] = '2';
+
+    //Should not Changed
     cout << str_modify.toString() << " Correct? " << (str_modify == "abc" ? "Yes" : "No") <<endl;
 
     PList list2;
