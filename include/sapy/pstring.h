@@ -41,7 +41,7 @@ public:
     
 
     PString captilize() const;
-    PString caseflod() const;
+    PString casefold() const;
     PString center(size_t width, char fillchar=' ') const;
     size_t count(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
     PBytes encode(const PString& encoding="utf-8", const PString& errors="strict") const;

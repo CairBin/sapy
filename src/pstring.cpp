@@ -139,7 +139,7 @@ PString PString::captilize() const
     return PString(std::towupper(_data[0])) + PString(_data.substr(1)).lower();
 }
 
-PString PString::caseflod() const
+PString PString::casefold() const
 {
     return lower(); // TODO
 }
