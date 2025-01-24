@@ -3,10 +3,10 @@
 #include "sapy/pobject.h"
 #include "sapy/pcollection_interface.h"
 #include "sapy/pstring.h"
-#include "sapy/panywrapper.h"
 #include <unordered_map>
 #include "sapy/putility.h"
 #include "sapy/piterator.h"
+#include "sapy/panywrapper.h"
 
 namespace sapy{
 
@@ -71,6 +71,17 @@ public:
     inline const_iterator end() const{
         return const_iterator(container_.end());
     }
+
+    inline iterator find(const PAnyWrapper& key){
+        return iterator(container_.find(key));
+    }
+    
+
+    inline const_iterator find(const PAnyWrapper& key) const{
+        return const_iterator(container_.find(key));
+    }
+
+    bool contain(const PAnyWrapper& key) const;
 
 private:
     

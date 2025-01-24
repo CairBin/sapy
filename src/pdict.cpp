@@ -24,6 +24,10 @@ PString PDict::toString() const {
     return result;
 }
 
+bool PDict::contain(const PAnyWrapper& key) const {
+    return container_.find(key) != container_.end();
+}
+
 void PDict::_print(std::ostream &os) const {
     os << toString();
 }
