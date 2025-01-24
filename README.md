@@ -18,4 +18,8 @@ Sapy is a collection of C++ libraries that are as "simple as Python".
 ```sh
 ./build.sh Debug  # Builds the project in Debug mode
 ```
+**Generate Conan Package:**
 
+```sh
+./package.sh
+```
