@@ -13,6 +13,7 @@ namespace sapy{
 
 class PAnyWrapper : public PObject{
 public:
+    PAnyWrapper() : data_(nullptr) {}
     template <typename T>
     PAnyWrapper(T val)
         : data_(std::move(val)) {}
@@ -23,7 +24,7 @@ public:
     T unwrap() const{
         return std::any_cast<T>(data_);
     }
-
+    virtual size_t hash() const override;
 
     template <typename U>
     operator U() const{

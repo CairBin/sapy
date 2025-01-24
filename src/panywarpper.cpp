@@ -37,4 +37,23 @@ void PAnyWrapper::_print(std::ostream& os) const {
     os << toString();
 }
 
+size_t PAnyWrapper::hash() const {
+    const std::type_info& ti = data_.type();
+    if (ti == typeid(int)) {
+        return std::hash<int>{}(std::any_cast<int>(data_));
+    } else if (ti == typeid(double)) {
+        return std::hash<double>{}(std::any_cast<double>(data_));
+    } else if (ti == typeid(std::string)) {
+        return std::hash<std::string>{}(std::any_cast<std::string>(data_));
+    } else if (ti == typeid(const char*)) {
+        return std::hash<std::string>{}(std::any_cast<const char*>(data_));
+    } else if (ti == typeid(char)) {
+        return std::hash<char>{}(std::any_cast<char>(data_));
+    } else if (ti == typeid(PString)) {
+        return std::any_cast<PString>(data_).hash();
+    } else {
+        return reinterpret_cast<size_t>(this);
+    }
+}
+
 } // namespace sapy
