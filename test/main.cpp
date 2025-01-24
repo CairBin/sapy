@@ -33,9 +33,13 @@ int main(){
         cout << str_chinese.toString() +"[" + std::to_string(i) + "] = " + str_chinese[i] << endl;
     }
 
-    // for(auto iter = str_chinese.begin(); iter != str_chinese.end(); iter++){
-    //     cout << *iter << endl;
-    // }
+    for(auto iter = str_chinese.begin(); iter != str_chinese.end(); iter++){
+        cout << PString(*iter) << endl;
+    }
+
+    for(auto c : str_chinese){
+        cout << PString(c) << endl;
+    }
 
     PString str3 = "abc:1222::3333:::";
     PList list = str3.split(":");
@@ -106,6 +110,10 @@ int main(){
 
     for(auto iter = list2.begin(); iter != list2.end(); iter++){
         cout << *iter << endl;
+    }
+
+    for(auto c: list2){
+        cout << c << endl;
     }
 
     PList list3;
