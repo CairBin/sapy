@@ -265,5 +265,9 @@ int main(){
         cout << iter->first << ": " << iter->second <<std::endl;
     }
 
+    for(auto iter: dict){
+        cout << iter.first << ": " << iter.second <<std::endl;
+    }
+
     return 0;
 }
