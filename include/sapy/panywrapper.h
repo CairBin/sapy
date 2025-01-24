@@ -31,6 +31,8 @@ public:
     }
 
     virtual PString toString() const override;
+    bool isString() const;
+    PString getString() const;
 private: 
     virtual void _print(std::ostream& os) const override;
     std::any data_;

@@ -12,11 +12,12 @@
 #include "sapy/pbytes.h"
 #include "sapy/piterator.h"
 #include "sapy/plist.h"
+#include "sapy/panywrapper.h"
 
 namespace sapy{
 
 class PList;
-
+class PAnyWrapper;
 class PString : public PObject {
 public:
     PString();                           
@@ -69,6 +70,17 @@ public:
     bool istitle() const;
     bool isupper() const;
 
+    template <typename Iterable>
+    inline PString join(const Iterable& it) const{
+        PString result;
+        for (auto iter = it.begin(); iter != it.end(); iter++) {
+            result += *iter;
+            if (iter + 1 != it.end()) {
+                result += *this;
+            }
+        }
+        return result;
+    }
 
     
     static std::u32string fromUTF8ToUTF32(const std::string& utf8Str);
@@ -97,14 +109,17 @@ public:
     PString& operator+=(char32_t other);
     PString& operator+=(const char* other);
     PString& operator+=(char other);
-
+    PString& operator+=(const PAnyWrapper& other);
+    PString& operator+=(const std::string& other);
     
     using iterator = std::u32string::iterator;
+    using const_iterator = std::u32string::const_iterator;
     using value_type = PString;  
 
     iterator begin();
     iterator end();
-
+    const_iterator begin() const;
+    const_iterator end() const;
     
     size_t hash() const override;
 

@@ -42,6 +42,13 @@ private:
 
 
 public:
+
+    PList() = default;
+    // template <typename... Args>
+    // PList(Args&&... args) {
+    //     (data_.emplace_back(std::forward<Args>(args)), ...);
+    // }
+
      PString toString() const;
 
     inline PAnyWrapper& operator[](size_t index){
@@ -55,7 +62,8 @@ public:
         data_.emplace_back(item);
     }
 
-    using iterator = std::vector<PAnyWrapper>::iterator;  //PIterator<PList>;
+    using iterator = std::vector<PAnyWrapper>::iterator;
+    using const_iterator = std::vector<PAnyWrapper>::const_iterator;  
     using value_type = PAnyWrapper;
     inline iterator begin(){
         return iterator(data_.begin());
@@ -64,7 +72,12 @@ public:
     inline iterator end(){
         return iterator(data_.end());
     }
-
+    inline const_iterator begin() const{
+        return const_iterator(data_.begin());
+    }
+    inline const_iterator end() const{
+        return const_iterator(data_.end());
+    }
 
 
 private:

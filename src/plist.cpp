@@ -9,7 +9,13 @@ void PList::_print(std::ostream& os) const{
 PString PList::toString() const {
     PString result = "[";
     for (size_t i = 0; i < data_.size(); i++) {
+        if(data_[i].isString()){
+            result += "\"";
+            result += data_[i].toString();
+            result += "\"";
+        }else{
         result += data_[i].toString();
+        }
         if (i + 1 < data_.size()) {
             result += ", ";
         }

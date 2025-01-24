@@ -1,5 +1,6 @@
 #include "sapy/panywrapper.h"
 #include "sapy/pstring.h"
+#include <string>
 namespace sapy {
 
 PString PAnyWrapper::toString() const {
@@ -14,15 +15,22 @@ PString PAnyWrapper::toString() const {
     } else if (ti == typeid(std::string)) {
         return PString(std::any_cast<std::string>(data_));
     } else if (ti == typeid(const char*)) {
-        return PString(std::string(std::any_cast<const char*>(data_)));
+        return PString((std::any_cast<const char*>(data_)));
     } else if (ti == typeid(char)) {
         return PString(std::string(1, std::any_cast<char>(data_)));
     } else if (ti == typeid(PString)) {
-        return std::any_cast<PString>(data_).toString();
+        return std::any_cast<PString>(data_);
     } else if (ti == typeid(PList)) {
         return std::any_cast<PList>(data_).toString();
     }
     return PString(std::string("<type: ") + ti.name() + ">");
+}
+
+bool PAnyWrapper::isString() const {
+    const std::type_info& ti = data_.type();
+    return ti == typeid(std::string) || ti == typeid(const char*) || 
+           ti == typeid(char) || ti == typeid(PString) ||
+           ti == typeid(char32_t) || ti == typeid(std::u32string);
 }
 
 void PAnyWrapper::_print(std::ostream& os) const {

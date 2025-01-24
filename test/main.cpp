@@ -98,6 +98,14 @@ int main(){
     cout << str_isupper2.toString() + ".isupper() = " << str_isupper2.isupper() << endl;
     cout << str_isupper3.toString() + ".isupper() = " << str_isupper3.isupper() << endl;
 
+    PString str_join = "a";
+    PList join_list;
+    join_list.append("a","b","c","d");
+    // PList join_list2 = PList("a", "b", "c", "d");
+    PString join_str = "sdf";
+     cout << str_join.toString() + ".join("<< join_str.toString() << ") = " << str_join.join(join_list).toString() << endl;
+    cout << str_join.toString() + ".join(" << join_list.toString() << ") = " << str_join.join(join_str).toString() << endl;
+
     PList list2;
     list2.append(42);               // int
     list2.append(3.14159);          // double
@@ -105,7 +113,7 @@ int main(){
     list2.append("abc");
     list2.append('a');
     list2.append(PString("PString"));
-    list2.append(list);
+    list2.appendSingle(list);
     cout << list2 << endl;
 
     for(auto iter = list2.begin(); iter != list2.end(); iter++){

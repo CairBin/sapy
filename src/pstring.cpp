@@ -370,6 +370,15 @@ PString& PString::operator+=(char other) {
     return *this;
 }
 
+PString& PString::operator+=(const PAnyWrapper& other) {
+    *this += other.toString();
+    return *this;
+}
+
+PString& PString::operator+=(const std::string& other) {
+    *this = *this + PString(other);
+    return *this;
+}
 
 
 PString::iterator PString::begin() {
@@ -379,6 +388,13 @@ PString::iterator PString::end() {
     return _data.end();
 }
 
+PString::const_iterator PString::begin() const {
+    return _data.begin();
+}
+
+PString::const_iterator PString::end() const {
+    return _data.end();
+}
 
 
 size_t PString::hash() const {
