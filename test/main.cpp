@@ -44,8 +44,12 @@ int main(){
 
     PString str3 = "abc:1222::3333:::";
     PList list = str3.split(":");
-    cout << str3.toString() + ".split() = " << list << endl;
-
+    cout << str3.toString() + ".split(\":\") = " << list << endl;
+    cout << str3.toString() + ".split() = " << str3.split() << endl;
+    cout << str3.toString() + ".split(\":\",2) = " << str3.split(":",2) << endl;
+    cout << str3.toString() + ".rsplit(\":\") = " << str3.rsplit(":") << endl;
+    cout << str3.toString() + ".rsplit() = " << str3.rsplit() << endl;
+    cout << str3.toString() + ".rsplit(\":\",2) = " << str3.rsplit(":",2) << endl;
 
     PString str_strip_before = "  \t\n\r  abc  \t\n\r  ";
     cout << str_strip_before.toString() + ".lstrip() = " << str_strip_before.lstrip().toString() << endl;
@@ -134,6 +138,25 @@ int main(){
     cout << str_replace.toString() + ".replace(\"abc\", \"123\", 2) = " << str_replace.replace("abc", "123", 2).toString() << endl;
     cout << str_replace.toString() + ".replace(\"abc\", \"-\") = " << str_replace.replace("abc", "-").toString() << endl;
     cout << str_replace.toString() + ".replace(\"abc\", \"|....\") = " << str_replace.replace("abc", "|....").toString() << endl;
+
+    PString str_find = "acbcc hello sdfdsfd";
+    cout << str_find.toString() + ".find(\"hello\") = " << str_find.find("hello") << endl;
+    cout << str_find.toString() + ".find(\"hello\",6,10) = " << str_find.find("hello",6,10) << endl;
+    cout << str_find.toString() + ".find(\"hello\",6,11) = " << str_find.find("hello",6,11) << endl;
+    cout << str_find.toString() + ".rfind(\"hello\") = " << str_find.rfind("hello") << endl;
+    cout << str_find.toString() + ".rfind(\"hello\",6,10) = " << str_find.rfind("hello",6,10) << endl;
+    cout << str_find.toString() + ".rfind(\"hello\",6,11) = " << str_find.rfind("hello",6,11) << endl;
+
+    PString str_rpartition = "acbcc hello hello sdfdsfd";
+    cout << str_rpartition.toString() + ".rpartition(\"hello\") = " << str_rpartition.rpartition("hello").toString() << endl;
+
+    PString str_splitlines = "acbcc hello\nhello\nsdfdsfd\rxxx\r\nxxx\n\rsss\x1cssds";
+    cout << str_splitlines.toString() + ".splitlines() = " << str_splitlines.splitlines().toString() << endl;
+    cout << str_splitlines.toString() + ".splitlines(true) = " << str_splitlines.splitlines(true).toString() << endl;
+
+    PString str_swapcase = "你好AbCdEf";
+    cout << str_swapcase.toString() + ".swapcase() = " << str_swapcase.swapcase().toString() << endl;
+    cout << str_swapcase.toString() + ".swapcase().swapcase() = " << str_swapcase.swapcase().swapcase().toString() << endl;
 
     PList list2;
     list2.append(42);               // int

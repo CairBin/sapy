@@ -38,13 +38,13 @@ public:
 
 
     
-    PString rstrip(const PString& __strp_str = "\r\n\t ") const;
-    PString strip(const PString& __strp_str = "\r\n\t ") const;
-    bool startsWith(const PString& other) const;
+    
+    
+    
     bool endsWith(const PString& other) const;
     
     PString upper() const;
-    PList split(const PString& delimiter) const;
+    
 
 
     PString captilize() const;
@@ -52,13 +52,13 @@ public:
     PString center(size_t width, char fillchar=' ') const;
     PString substr(size_t start, size_t end=std::u32string::npos) const;
     size_t count(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
-    size_t find(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
+    int find(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
     
     template <typename... Args>
     inline PString format(Args&&... args) const{
         return PString(std::vformat(this->toStdString(), std::make_format_args(args...)));
     }
-    size_t index(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
+    int index(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
     bool isalnum() const;
     bool isalpha() const;
     bool isascii() const;
@@ -95,7 +95,17 @@ public:
     PString remoteprefix(const PString& prefix) const;
     PString removesuffix(const PString& suffix) const;
     PString replace(const PString& old, const PString& new_, size_t count=-1) const;
+    int rfind(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
+    int rindex(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
     PString rjust(size_t width, char fillchar=' ') const;
+    PList rpartition(const PString& sep) const;
+    PList rsplit(const PString& sep = "", size_t maxsplit = -1) const;
+    PString rstrip(const PString& __strp_str = "\r\n\t ") const;
+    PList split(const PString& sep = "", size_t maxsplit = -1)const;
+    PList splitlines(bool keepends=false) const;
+    bool startsWith(const PString& other) const;
+    PString strip(const PString& __strp_str = "\r\n\t ") const;
+    PString swapcase() const;
 
     static std::u32string fromUTF8ToUTF32(const std::string& utf8Str);
     static std::string fromUTF32ToUTF8(const std::u32string& utf32Str);
