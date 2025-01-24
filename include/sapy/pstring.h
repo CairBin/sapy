@@ -41,7 +41,7 @@ public:
     
     
     
-    bool endsWith(const PString& other) const;
+    bool endswith(const PString& other) const;
     
     PString upper() const;
     
@@ -103,7 +103,7 @@ public:
     PString rstrip(const PString& __strp_str = "\r\n\t ") const;
     PList split(const PString& sep = "", size_t maxsplit = -1)const;
     PList splitlines(bool keepends=false) const;
-    bool startsWith(const PString& other) const;
+    bool startswith(const PString& other) const;
     PString strip(const PString& __strp_str = "\r\n\t ") const;
     PString swapcase() const;
 

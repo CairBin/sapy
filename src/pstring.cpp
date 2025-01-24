@@ -67,12 +67,12 @@ PString PString::strip(const PString &__strp_str) const
     return lstrip(__strp_str).rstrip(__strp_str);
 }
 
-bool PString::startsWith(const PString &other) const
+bool PString::startswith(const PString &other) const
 {
     return _data.rfind(other._data, 0) == 0;
 }
 
-bool PString::endsWith(const PString &other) const
+bool PString::endswith(const PString &other) const
 {
 
     if (other._data.size() > _data.size())
@@ -448,7 +448,7 @@ PList PString::partition(const PString &sep) const
 
 PString PString::remoteprefix(const PString &prefix) const
 {
-    if (startsWith(prefix))
+    if (startswith(prefix))
     {
         return substr(prefix.length());
     }
@@ -457,7 +457,7 @@ PString PString::remoteprefix(const PString &prefix) const
 
 PString PString::removesuffix(const PString &suffix) const
 {
-    if (endsWith(suffix))
+    if (endswith(suffix))
     {
         return substr(0, length() - suffix.length());
     }
