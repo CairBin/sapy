@@ -233,8 +233,12 @@ int main(){
 
     auto value1 = dict.find(PString("key1"));
     auto value2 = dict.find(PString("key2"));
-    std::cout <<value1->second << std::endl;
-    std::cout <<value2->second << std::endl;
+    std::cout << dict[PString("key1")]<< std::endl;
+    std::cout << dict[PString("key2")] << std::endl;
+    std::cout << dict[PString("key3")] << std::endl;
+    std::cout << dict[PString("key4")] << std::endl;
+    std::cout << dict[999] << std::endl;
+    std::cout << dict[3.14159] << std::endl;
 
 
 
