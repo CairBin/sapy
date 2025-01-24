@@ -119,6 +119,21 @@ int main(){
     cout << str_partition.toString() + ".partition(\"hello\") = " << str_partition.partition("hello").toString() << endl;
     cout << str_partition.toString() + ".partition(\"hee--\") = " << str_partition.partition("hee--").toString() << endl;
 
+    PString str_removeprefix = "TestHook";
+    PString str_removeprefix2 = "BaseTestCase";
+    cout << str_removeprefix.toString() + ".remoteprefix(\"Test\") = " << str_removeprefix.remoteprefix("Test").toString() << endl;
+    cout << str_removeprefix2.toString() + ".remoteprefix(\"Test\") = " << str_removeprefix2.remoteprefix("Test").toString() << endl;
+
+    PString str_removesuffix = "MiscTests";
+    PString str_removesuffix2 = "TmpDirMixin";
+    cout << str_removesuffix.toString() + ".removesuffix(\"Tests\") = " << str_removesuffix.removesuffix("Tests").toString() << endl;
+    cout << str_removesuffix2.toString() + ".removesuffix(\"Tests\") = " << str_removesuffix2.removesuffix("Tests").toString() << endl;
+
+    PString str_replace = "abcabcabc";
+    cout << str_replace.toString() + ".replace(\"abc\", \"123\") = " << str_replace.replace("abc", "123").toString() << endl;
+    cout << str_replace.toString() + ".replace(\"abc\", \"123\", 2) = " << str_replace.replace("abc", "123", 2).toString() << endl;
+    cout << str_replace.toString() + ".replace(\"abc\", \"-\") = " << str_replace.replace("abc", "-").toString() << endl;
+    cout << str_replace.toString() + ".replace(\"abc\", \"|....\") = " << str_replace.replace("abc", "|....").toString() << endl;
 
     PList list2;
     list2.append(42);               // int

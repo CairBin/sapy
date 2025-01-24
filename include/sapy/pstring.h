@@ -92,6 +92,9 @@ public:
     static PDict maketrans(const PString& x, const PString& y, const PString &z);
     PString translate(const PDict& table) const;
     PList partition(const PString& sep) const;
+    PString remoteprefix(const PString& prefix) const;
+    PString removesuffix(const PString& suffix) const;
+    PString replace(const PString& old, const PString& new_, size_t count=-1) const;
     PString rjust(size_t width, char fillchar=' ') const;
 
     static std::u32string fromUTF8ToUTF32(const std::string& utf8Str);

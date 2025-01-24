@@ -347,6 +347,41 @@ PList PString::partition(const PString& sep) const{
     return result;
 }
 
+PString PString::remoteprefix(const PString& prefix) const{
+    if (startsWith(prefix)){
+        return substr(prefix.length());
+    }
+    return *this;
+}
+
+PString PString::removesuffix(const PString& suffix) const{
+    if (endsWith(suffix)){
+        return substr(0, length() - suffix.length());
+    }
+    return *this;
+}
+
+PString PString::replace(const PString& old, const PString& new_, size_t count) const{
+    PString result;
+    size_t pos = 0;
+    size_t prevPos = 0;
+    while ((pos = _data.find(old._data, prevPos)) != std::u32string::npos) {
+        result += PString(_data.substr(prevPos, pos - prevPos));
+        result += new_;
+        prevPos = pos + old._data.size();
+        if (count != std::u32string::npos) {
+            count--;
+            if (count == 0) {
+                break;
+            }
+        }
+    }
+    if (prevPos <= _data.size()) {
+        result += PString(_data.substr(prevPos));
+    }
+    return result;
+}
+
 std::u32string PString::fromUTF8ToUTF32(const std::string& utf8Str) {
     std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
     return converter.from_bytes(utf8Str);
