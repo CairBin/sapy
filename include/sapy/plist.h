@@ -68,9 +68,7 @@ public:
 
 
 private:
-    inline virtual void _print(std::ostream& os) const override{
-        //os << toString();
-    }
+    virtual void _print(std::ostream& os) const override;
     std::vector<PAnyWrapper> data_;
 
     friend class PCollectionInterface<PList>;

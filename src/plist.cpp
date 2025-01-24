@@ -2,6 +2,9 @@
 namespace sapy{
 
 
+void PList::_print(std::ostream& os) const{
+    os << toString();
+}
 
 PString PList::toString() const {
     PString result = "[";

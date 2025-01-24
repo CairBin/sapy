@@ -62,8 +62,8 @@ int main(){
     PString str_center = "abc";
     cout << str_center.toString() + ".center(10) = " << str_center.center(10).toString() << endl;
     cout << str_center.toString() + ".center(10, '-') = " << str_center.center(10, '-').toString() << endl;
-    cout << str_center.toString() + ".center(2, '-') = " << str_center.center(11, '-').toString() << endl;
-    cout << str_center.toString() + ".center(4, '-') = " << str_center.center(11, '-').toString() << endl;
+    cout << str_center.toString() + ".center(2, '-') = " << str_center.center(2, '-').toString() << endl;
+    cout << str_center.toString() + ".center(4, '-') = " << str_center.center(4, '-').toString() << endl;
 
     PString str_count = "abcabcabc";
     cout << str_count.toString() + ".count(\"abc\") = " << str_count.count("abc") << endl;

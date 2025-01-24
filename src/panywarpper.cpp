@@ -18,7 +18,9 @@ PString PAnyWrapper::toString() const {
     } else if (ti == typeid(char)) {
         return PString(std::string(1, std::any_cast<char>(data_)));
     } else if (ti == typeid(PString)) {
-        return PString(std::any_cast<PString>(data_));
+        return std::any_cast<PString>(data_).toString();
+    } else if (ti == typeid(PList)) {
+        return std::any_cast<PList>(data_).toString();
     }
     return PString(std::string("<type: ") + ti.name() + ">");
 }
