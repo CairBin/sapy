@@ -19,6 +19,7 @@ namespace sapy{
 class PList;
 class PAnyWrapper;
 class PDict;
+class PBytes;
 
 class PString : public PObject {
 public:
@@ -34,30 +35,26 @@ public:
     std::string toStdString() const;
     int toInt() const;
     size_t length() const;
-
-
-
+    
+    PString substr(size_t start, size_t end=std::u32string::npos) const;
     
     
-    
-    
-    bool endswith(const PString& other) const;
-    
-    PString upper() const;
-    
-
 
     PString captilize() const;
     PString caseflod() const;
     PString center(size_t width, char fillchar=' ') const;
-    PString substr(size_t start, size_t end=std::u32string::npos) const;
     size_t count(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
+    PBytes encode(const PString& encoding="utf-8", const PString& errors="strict") const;
+    bool endswith(const PString& other) const;
+    PString expandtabs(size_t tabsize=8) const;
     int find(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
     
     template <typename... Args>
     inline PString format(Args&&... args) const{
         return PString(std::vformat(this->toStdString(), std::make_format_args(args...)));
     }
+    
+
     int index(const PString& sub, size_t start=0, size_t end=std::u32string::npos) const;
     bool isalnum() const;
     bool isalpha() const;
@@ -90,7 +87,6 @@ public:
     static PDict maketrans(PDict& x);
     static PDict maketrans(const PString& x, const PString& y);
     static PDict maketrans(const PString& x, const PString& y, const PString &z);
-    PString translate(const PDict& table) const;
     PList partition(const PString& sep) const;
     PString remoteprefix(const PString& prefix) const;
     PString removesuffix(const PString& suffix) const;
@@ -106,6 +102,10 @@ public:
     bool startswith(const PString& other) const;
     PString strip(const PString& __strp_str = "\r\n\t ") const;
     PString swapcase() const;
+    PString title() const;
+    PString translate (const PDict& table) const; 
+    PString upper() const;
+    PString zfill(size_t width) const;
 
     static std::u32string fromUTF8ToUTF32(const std::string& utf8Str);
     static std::string fromUTF32ToUTF8(const std::u32string& utf32Str);

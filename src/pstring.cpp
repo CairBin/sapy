@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <iostream>
 #include <format>
+#include <vector>
+#include <string>
 
 namespace sapy
 {
@@ -419,20 +421,7 @@ PDict PString::maketrans(const PString &x, const PString &y, const PString &z)
     return result;
 }
 
-PString PString::translate(const PDict &table) const
-{
-    // PString result;
-    // for(auto c : _data){
-    //     auto it = table.find(PString(c));
-    //     if(it == table.end()){
-    //         result += c;
-    //     }else{
-    //         result += it->second;
-    //     }
-    // }
-    // return result;
-    return PString(); // TODO
-}
+
 PList PString::partition(const PString &sep) const
 {
     PList result;
@@ -602,6 +591,161 @@ PString PString::swapcase() const
     }
     return PString(swapcaseStr);
 }
+
+PString PString::title() const
+{
+    std::u32string titleStr;
+    bool start = false;
+    for (char32_t c : _data)
+    {
+        if(!std::iswalpha(c)){
+            titleStr.push_back(c);
+            start = false;
+            continue;
+        }else{
+            if(!start){
+                titleStr.push_back(std::towupper(c));
+                start = true;
+            }else{
+                titleStr.push_back(std::towlower(c));
+            }
+        }
+    }
+    return PString(titleStr);
+}
+
+PString PString::translate(const PDict &table) const
+{
+    PString result;
+    for (auto c : _data)
+    {
+        auto ch = PString(c);
+        if(table.contain(ch)){
+            result += table[ch].unwrap<PString>();
+        }else{
+            result += c;
+        }
+    }
+    return result;
+}
+
+PString PString::zfill(size_t width) const
+{
+    if (width <= _data.size())
+    {
+        return *this;
+    }
+    size_t padSize = width - _data.size();
+    if (_data[0] == U'-' || _data[0] == U'+')
+    {
+        return PString(_data.substr(0, 1) + std::u32string(padSize, U'0') + _data.substr(1));
+    }
+    return PString(std::u32string(padSize, U'0') + _data);
+}
+
+PString PString::expandtabs(size_t tabsize) const
+{
+    PString result;
+    size_t cnt = 0;
+    for (auto c : _data)
+    {
+        if (c == U'\t'){
+            if(cnt >= tabsize){
+                result += PString(" ")*tabsize;
+            }else{
+                result += PString(" ")*(tabsize - cnt);
+            }
+            cnt = 0;
+        }
+        else
+        {
+            result += c;
+            if(c == U'\n' || c == U'\r'){
+                cnt = 0;
+            }else{
+                cnt++;
+            }
+        }
+    }
+    return result;
+}
+
+PBytes PString::encode(const PString &encoding, const PString &errors) const {
+    std::vector<uint8_t> result;
+
+    std::string encoding_str = encoding.toStdString();
+
+    if (encoding_str == "utf-8") {
+        // UTF-32 to UTF-8 conversion
+        std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
+        try {
+            std::string utf8_str = converter.to_bytes(_data);
+            result.assign(utf8_str.begin(), utf8_str.end());
+        } catch (const std::range_error &e) {
+            if (errors == "strict") {
+                throw std::runtime_error("Encoding error: " + std::string(e.what()));
+            } else if (errors == "ignore") {
+                // Ignore errors, return partial result
+            } else {
+                throw std::runtime_error("Unsupported error handling mode: " + errors.toStdString());
+            }
+        }
+
+    } else if (encoding_str == "utf-16") {
+        // UTF-32 to UTF-16 conversion with BOM (Little Endian)
+        std::wstring_convert<std::codecvt_utf16<char32_t>, char32_t> converter;
+        try {
+            // Add BOM for UTF-16 Little Endian
+            result.push_back(0xFF);
+            result.push_back(0xFE);
+
+            for (char32_t ch : _data) {
+                if (ch <= 0xFFFF) { // BMP character
+                    result.push_back(static_cast<uint8_t>(ch & 0xFF));
+                    result.push_back(static_cast<uint8_t>((ch >> 8) & 0xFF));
+                } else { // Non-BMP character, encode as surrogate pair
+                    char32_t surrogate = ch - 0x10000;
+                    char16_t high = static_cast<char16_t>((surrogate >> 10) + 0xD800);
+                    char16_t low = static_cast<char16_t>((surrogate & 0x3FF) + 0xDC00);
+
+                    result.push_back(static_cast<uint8_t>(high & 0xFF));
+                    result.push_back(static_cast<uint8_t>((high >> 8) & 0xFF));
+                    result.push_back(static_cast<uint8_t>(low & 0xFF));
+                    result.push_back(static_cast<uint8_t>((low >> 8) & 0xFF));
+                }
+            }
+        } catch (const std::range_error &e) {
+            if (errors == "strict") {
+                throw std::runtime_error("Encoding error: " + std::string(e.what()));
+            } else if (errors == "ignore") {
+                // Ignore errors, return partial result
+            } else {
+                throw std::runtime_error("Unsupported error handling mode: " + errors.toStdString());
+            }
+        }
+
+    } else if (encoding_str == "utf-32") {
+        // UTF-32 encoding with BOM (Little Endian)
+        result.push_back(0xFF);
+        result.push_back(0xFE);
+        result.push_back(0x00);
+        result.push_back(0x00);
+
+        for (char32_t ch : _data) {
+            uint8_t bytes[4];
+            bytes[0] = static_cast<uint8_t>(ch & 0xFF);         // Lowest byte
+            bytes[1] = static_cast<uint8_t>((ch >> 8) & 0xFF);
+            bytes[2] = static_cast<uint8_t>((ch >> 16) & 0xFF);
+            bytes[3] = static_cast<uint8_t>((ch >> 24) & 0xFF); // Highest byte
+            result.insert(result.end(), bytes, bytes + 4);
+        }
+    } else {
+        throw std::runtime_error("Unsupported encoding: " + encoding.toStdString());
+    }
+
+    return PBytes(result);
+}
+
 
 std::u32string PString::fromUTF8ToUTF32(const std::string &utf8Str)
 {

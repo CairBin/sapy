@@ -113,7 +113,7 @@ int main(){
 
     auto transtable = PString::maketrans("abc", "123");
     auto transtable2 = PString::maketrans("abc", "123", "def");
-    PString str_translate = "abcdefg";
+
     cout << "PString::maketrans(\"abc\", \"123\") = " << transtable.toString() << endl;
     cout << "PString::maketrans(\"abc\", \"123\", \"def\") = " << transtable2.toString() << endl;
     // cout << str_translate.toString() + ".translate(" << transtable.toString() << ") = " << str_translate.translate(transtable).toString() << endl;
@@ -158,6 +158,35 @@ int main(){
     cout << str_swapcase.toString() + ".swapcase() = " << str_swapcase.swapcase().toString() << endl;
     cout << str_swapcase.toString() + ".swapcase().swapcase() = " << str_swapcase.swapcase().swapcase().toString() << endl;
 
+    PString str_title = "they're bill's friends from the UK";
+    cout << str_title.toString() + ".title() = " << str_title.title().toString() << endl;
+
+    PDict trans_table = PString::maketrans("123","abc");
+    PString str_translate = "123abc---123456712123";
+    cout << str_translate.toString() << ".translate(" << trans_table.toString() << ") = " << str_translate.translate(trans_table).toString() << endl;
+
+    PString str_zfill = "42";
+    cout << str_zfill.toString() + ".zfill(5) = " << str_zfill.zfill(5).toString() << endl;
+    cout << str_zfill.toString() + ".zfill(2) = " << str_zfill.zfill(2).toString() << endl;
+    PString str_zfill2 = "-42";
+    cout << str_zfill2.toString() + ".zfill(5) = " << str_zfill2.zfill(5).toString() << endl;
+    cout << str_zfill2.toString() + ".zfill(2) = " << str_zfill2.zfill(2).toString() << endl;
+
+    PString str_expandtabs = "\n67890\t";
+    PString str_expandtabs2 = "01\t012\t0123\t01234";
+    cout << str_expandtabs.toString() + ".expandtabs() = " << str_expandtabs.expandtabs().toString()  << " len=" <<
+    str_expandtabs.expandtabs().length() << endl;
+    cout << str_expandtabs2.toString() + ".expandtabs(4) = " << str_expandtabs2.expandtabs(4).toString()  << " len=" <<
+    str_expandtabs2.expandtabs(4).length() << endl;
+
+    PString str_encode = "你好,abc";
+    cout << str_encode.toString() + ".encode(\"utf-8\") = " << str_encode.encode("utf-8").toString() <<
+    "len = " << str_encode.encode("utf-8").length() << std::endl;
+    cout << str_encode.toString() + ".encode(\"utf-16\") = " << str_encode.encode("utf-16").toString() <<
+    "len = " << str_encode.encode("utf-16").length() << std::endl;
+    cout << str_encode.toString() + ".encode(\"utf-32\") = " << str_encode.encode("utf-32").toString() <<
+    "len = " << str_encode.encode("utf-32").length() << std::endl;
+
     PList list2;
     list2.append(42);               // int
     list2.append(3.14159);          // double
@@ -201,6 +230,12 @@ int main(){
     dict[3.14159] = PString("value6");
     dict[PString("key7")] = PString("value7");
     cout << dict << endl;
+
+    auto value1 = dict.find(PString("key1"));
+    auto value2 = dict.find(PString("key2"));
+    std::cout <<value1->second << std::endl;
+    std::cout <<value2->second << std::endl;
+
 
 
     return 0;
