@@ -197,6 +197,10 @@ int main(){
     list2.appendSingle(list);
     cout << list2 << endl;
 
+    PList list_init1 = {1,2,3,4,5,6,7,8,9,10};
+    cout << list_init1 << endl;
+    PList list_init2 = {"Hello", "World", "!", 1, 2, 3, 3.14159};
+    cout << list_init2 << endl;
 
 
     for(auto iter = list2.begin(); iter != list2.end(); iter++){

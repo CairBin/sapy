@@ -44,6 +44,7 @@ private:
 public:
 
     PList() = default;
+    PList(std::initializer_list<PAnyWrapper> init) : data_(init){};
     // template <typename... Args>
     // PList(Args&&... args) {
     //     (data_.emplace_back(std::forward<Args>(args)), ...);
