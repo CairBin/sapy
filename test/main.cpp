@@ -4,6 +4,7 @@
 #include <ostream>
 #include <memory>
 #include <format>
+#include <cassert>
 #include "sapy/pstring.h"
 #include "sapy/plist.h"
 #include "sapy/piterator.h"
@@ -186,6 +187,11 @@ int main(){
     "len = " << str_encode.encode("utf-16").length() << std::endl;
     cout << str_encode.toString() + ".encode(\"utf-32\") = " << str_encode.encode("utf-32").toString() <<
     "len = " << str_encode.encode("utf-32").length() << std::endl;
+
+    PString str_modify = "abc";
+    str_modify[0] = '1';
+    str_modify[1] = '2';
+    cout << str_modify.toString() << " Correct? " << (str_modify == "abc" ? "Yes" : "No") <<endl;
 
     PList list2;
     list2.append(42);               // int
