@@ -7,6 +7,7 @@
 #include "sapy/pstring.h"
 #include "sapy/plist.h"
 #include "sapy/piterator.h"
+#include "sapy/pdict.h"
 
 using namespace sapy;
 using namespace std;
@@ -106,6 +107,19 @@ int main(){
      cout << str_join.toString() + ".join("<< join_str.toString() << ") = " << str_join.join(join_list).toString() << endl;
     cout << str_join.toString() + ".join(" << join_list.toString() << ") = " << str_join.join(join_str).toString() << endl;
 
+    auto transtable = PString::maketrans("abc", "123");
+    auto transtable2 = PString::maketrans("abc", "123", "def");
+    PString str_translate = "abcdefg";
+    cout << "PString::maketrans(\"abc\", \"123\") = " << transtable.toString() << endl;
+    cout << "PString::maketrans(\"abc\", \"123\", \"def\") = " << transtable2.toString() << endl;
+    // cout << str_translate.toString() + ".translate(" << transtable.toString() << ") = " << str_translate.translate(transtable).toString() << endl;
+    // cout << str_translate.toString() + ".translate(" << transtable2.toString() << ") = " << str_translate.translate(transtable2).toString() << endl;
+
+    PString str_partition = "acbcc hello sdfdsfd";
+    cout << str_partition.toString() + ".partition(\"hello\") = " << str_partition.partition("hello").toString() << endl;
+    cout << str_partition.toString() + ".partition(\"hee--\") = " << str_partition.partition("hee--").toString() << endl;
+
+
     PList list2;
     list2.append(42);               // int
     list2.append(3.14159);          // double
@@ -115,6 +129,8 @@ int main(){
     list2.append(PString("PString"));
     list2.appendSingle(list);
     cout << list2 << endl;
+
+
 
     for(auto iter = list2.begin(); iter != list2.end(); iter++){
         cout << *iter << endl;
@@ -137,6 +153,16 @@ int main(){
         cout << list3[i];
         cout << ", type: " << typeid(list3[i]).name() << endl;
     }
+
+    PDict dict;
+    dict[PString("key1")] = PString("value1");
+    dict[PString("key2")] = PString("value2");
+    dict[PString("key3")] = 128;
+    dict[PString("key4")] = 3.14159;
+    dict[999] = PString("value5");
+    dict[3.14159] = PString("value6");
+    dict[PString("key7")] = PString("value7");
+    cout << dict << endl;
 
 
     return 0;

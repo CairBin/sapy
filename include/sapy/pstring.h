@@ -13,11 +13,13 @@
 #include "sapy/piterator.h"
 #include "sapy/plist.h"
 #include "sapy/panywrapper.h"
-
+#include "sapy/pdict.h"
 namespace sapy{
 
 class PList;
 class PAnyWrapper;
+class PDict;
+
 class PString : public PObject {
 public:
     PString();                           
@@ -35,12 +37,12 @@ public:
 
 
 
-    PString lstrip(const PString& __strp_str = "\r\n\t ") const;
+    
     PString rstrip(const PString& __strp_str = "\r\n\t ") const;
     PString strip(const PString& __strp_str = "\r\n\t ") const;
     bool startsWith(const PString& other) const;
     bool endsWith(const PString& other) const;
-    PString lower() const;
+    
     PString upper() const;
     PList split(const PString& delimiter) const;
 
@@ -82,7 +84,16 @@ public:
         return result;
     }
 
-    
+    PString ljust(size_t width, char fillchar=' ') const;
+    PString lower() const;
+    PString lstrip(const PString& __strp_str = "\r\n\t ") const;
+    static PDict maketrans(PDict& x);
+    static PDict maketrans(const PString& x, const PString& y);
+    static PDict maketrans(const PString& x, const PString& y, const PString &z);
+    PString translate(const PDict& table) const;
+    PList partition(const PString& sep) const;
+    PString rjust(size_t width, char fillchar=' ') const;
+
     static std::u32string fromUTF8ToUTF32(const std::string& utf8Str);
     static std::string fromUTF32ToUTF8(const std::u32string& utf32Str);
 

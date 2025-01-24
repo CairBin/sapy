@@ -276,6 +276,76 @@ bool PString::isupper() const{
     return cased;
 }
 
+PString PString::ljust(size_t width, char fillchar) const {
+    if (width <= _data.size()) {
+        return *this;
+    }
+    size_t padSize = width - _data.size();
+    return PString(_data + std::u32string(padSize, fillchar));
+}
+
+PString PString::rjust(size_t width, char fillchar) const {
+    if (width <= _data.size()) {
+        return *this;
+    }
+    size_t padSize = width - _data.size();
+    return PString(std::u32string(padSize, fillchar) + _data);
+}
+
+PDict PString::maketrans(PDict& x) {
+    return x; // TODO
+}
+
+
+
+PDict PString::maketrans(const PString& x, const PString& y) {
+    PDict result;
+    if(x.length() != y.length()){
+        throw std::runtime_error("the first two maketrans arguments must have equal length");
+    }
+    for (size_t i = 0; i < x.length(); i++) {
+        result[x[i]] = y[i];
+    }
+    return result;
+}
+
+PDict PString::maketrans(const PString& x, const PString& y, const PString &z) {
+    PDict result;
+    if(x.length() != y.length() || x.length() != z.length()){
+        throw std::runtime_error("the first two maketrans arguments must have equal length");
+    }
+    for(size_t i = 0; i < x.length(); i++){
+        result[x[i]] = y[i];
+    }
+    for(size_t i = 0; i < z.length(); i++){
+        result[z[i]] = PString();
+    }
+    return result;
+}
+
+PString PString::translate(const PDict& table) const{
+    // PString result;
+    // for(auto c : _data){
+    //     auto it = table.find(PString(c));
+    //     if(it == table.end()){
+    //         result += c;
+    //     }else{
+    //         result += it->second;
+    //     }
+    // }
+    // return result;
+    return PString(); // TODO
+}
+PList PString::partition(const PString& sep) const{
+    PList result;
+    size_t pos = find(sep);
+    if (pos == -1){
+        result.append(*this, PString(), PString());
+        return result;
+    }
+    result.append(substr(0, pos), sep, substr(pos + sep.length()));
+    return result;
+}
 
 std::u32string PString::fromUTF8ToUTF32(const std::string& utf8Str) {
     std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
