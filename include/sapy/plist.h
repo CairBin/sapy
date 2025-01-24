@@ -66,18 +66,19 @@ public:
     using iterator = std::vector<PAnyWrapper>::iterator;
     using const_iterator = std::vector<PAnyWrapper>::const_iterator;  
     using value_type = PAnyWrapper;
-    inline iterator begin(){
-        return iterator(data_.begin());
+    using const_value_type = const PAnyWrapper;
+    inline PIterator<PList> begin(){
+        return (data_.begin());
     }
 
-    inline iterator end(){
-        return iterator(data_.end());
+    inline PIterator<PList> end(){
+        return (data_.end());
     }
-    inline const_iterator begin() const{
-        return const_iterator(data_.begin());
+    inline const PIterator<PList> cbegin() const{
+        return (data_.cbegin());
     }
-    inline const_iterator end() const{
-        return const_iterator(data_.end());
+    inline const PIterator<PList> cend() const{
+        return (data_.cend());
     }
 
 

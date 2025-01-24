@@ -36,7 +36,7 @@ int main(){
     }
 
     for(auto iter = str_chinese.begin(); iter != str_chinese.end(); iter++){
-        cout << PString(*iter) << endl;
+        cout << *iter << endl;
     }
 
     for(auto c : str_chinese){
@@ -260,5 +260,10 @@ int main(){
 
     std::cout <<dict2 <<std::endl;
     std::cout << "dict2[\"key3\"] = " << dict2["key3"] << std::endl; 
+
+    for(auto iter = dict.begin(); iter != dict.end(); iter++){
+        cout << iter->first << ": " << iter->second <<std::endl;
+    }
+
     return 0;
 }

@@ -13,17 +13,20 @@ class PIterator {
 public:
 
     using IteratorType = typename Container::iterator;
+    using ConstIteratorType = typename Container::const_iterator;
     using ValueType = typename Container::value_type;
+    using ConstValueType = typename Container::const_value_type;
 
     PIterator(IteratorType iter) : _iter(iter) {}
+    PIterator(ConstIteratorType iter) : _iter(iter) {}
 
-
-    ValueType& operator*() {
+    // Do not use reference here
+    ValueType operator*() {
         return *_iter;
     }
 
-
-    const ValueType& operator*() const {
+    // Do not use reference here
+    const ValueType operator*() const {
         return *_iter;
     }
 
@@ -39,6 +42,9 @@ public:
         return temp;
     }
 
+    PIterator operator+(size_t n) {
+        return PIterator(_iter + n);
+    }
 
     bool operator!=(const PIterator& other) const {
         return _iter != other._iter;
@@ -48,6 +54,7 @@ public:
         return _iter == other._iter;
     }
 
+    ConstValueType* operator->() const { return &(*_iter); }
     // virtual PString toString() const override {
     //     return PString("PIterator");
     // }
@@ -57,7 +64,7 @@ private:
     //     os << toString();
     // }
 
-    IteratorType _iter;  
+    ConstIteratorType _iter;  
 };
 
 }

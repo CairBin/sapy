@@ -61,18 +61,19 @@ public:
     using iterator = std::unordered_map<PAnyWrapper, PAnyWrapper, HashFunc>::iterator;
     using const_iterator = std::unordered_map<PAnyWrapper, PAnyWrapper, HashFunc>::const_iterator;  
     using value_type = std::pair<PAnyWrapper, PAnyWrapper>;
-    inline iterator begin(){
-        return iterator(container_.begin());
+    using const_value_type = const std::pair<const PAnyWrapper, PAnyWrapper>;
+    inline PIterator<PDict> begin(){
+        return (container_.begin());
     }
 
-    inline iterator end(){
-        return iterator(container_.end());
+    inline PIterator<PDict> end(){
+        return (container_.end());
     }
-    inline const_iterator begin() const{
-        return const_iterator(container_.begin());
+    inline const PIterator<PDict> begin() const{
+        return (container_.cbegin());
     }
-    inline const_iterator end() const{
-        return const_iterator(container_.end());
+    inline const PIterator<PDict> end() const{
+        return (container_.cend());
     }
 
     inline iterator find(const PAnyWrapper& key){

@@ -867,23 +867,23 @@ PString &PString::operator+=(const std::string &other)
     return *this;
 }
 
-PString::iterator PString::begin()
+PIterator<PString> PString::begin()
 {
     return _data.begin();
 }
-PString::iterator PString::end()
+PIterator<PString> PString::end()
 {
     return _data.end();
 }
 
-PString::const_iterator PString::begin() const
+const PIterator<PString> PString::cbegin() const
 {
-    return _data.begin();
+    return _data.cbegin();
 }
 
-PString::const_iterator PString::end() const
+const PIterator<PString> PString::cend() const
 {
-    return _data.end();
+    return _data.cend();
 }
 
 size_t PString::hash() const

@@ -72,9 +72,9 @@ public:
     template <typename Iterable>
     inline PString join(const Iterable& it) const{
         PString result;
-        for (auto iter = it.begin(); iter != it.end(); iter++) {
+        for (auto iter = it.cbegin(); iter != it.cend(); iter++) {
             result += *iter;
-            if (iter + 1 != it.end()) {
+            if (iter + 1 != it.cend()) {
                 result += *this;
             }
         }
@@ -139,11 +139,12 @@ public:
     using iterator = std::u32string::iterator;
     using const_iterator = std::u32string::const_iterator;
     using value_type = PString;  
+    using const_value_type = const PString;
 
-    iterator begin();
-    iterator end();
-    const_iterator begin() const;
-    const_iterator end() const;
+    PIterator<PString> begin();
+    PIterator<PString> end();
+    const PIterator<PString> cbegin() const;
+    const PIterator<PString> cend() const;
     
     size_t hash() const override;
 
