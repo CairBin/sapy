@@ -769,7 +769,7 @@ bool PString::operator!=(const PString &other) const
     return !(*this == other);
 }
 
-PString PString::operator[](size_t index) const
+const PString PString::operator[](size_t index) const
 {
     if (index >= _data.size())
     {
@@ -777,8 +777,7 @@ PString PString::operator[](size_t index) const
     }
 
     auto singleChar32 = _data[index];
-    std::u32string tmp(1, singleChar32);
-    return PString(tmp);
+    return PString(singleChar32);
 }
 
 PString PString::operator+(const PString &other) const

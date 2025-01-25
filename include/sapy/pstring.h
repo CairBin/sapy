@@ -115,7 +115,7 @@ public:
     bool operator!=(const PString& other) const;
 
     
-    PString operator[](size_t index) const;
+    const PString operator[](size_t index) const;
 
     
     PString operator+(const PString& other) const;

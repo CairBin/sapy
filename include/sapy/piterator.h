@@ -20,13 +20,13 @@ public:
     PIterator(IteratorType iter) : _iter(iter) {}
     PIterator(ConstIteratorType iter) : _iter(iter) {}
 
-    // Do not use reference here
-    ValueType operator*() {
-        return *_iter;
-    }
+    // // Do not use reference here
+    // ValueType operator*() {
+    //     return *_iter;
+    // }
 
     // Do not use reference here
-    const ValueType operator*() const {
+    ConstValueType operator*() const {
         return *_iter;
     }
 
