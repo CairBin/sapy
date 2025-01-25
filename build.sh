@@ -48,6 +48,6 @@ cmake ../../../../ \
 
 
 echo "Building the project..."
-cmake --build . --config ${BUILD_TYPE}  
+cmake --build . --config ${BUILD_TYPE} -j$(nproc 2>/dev/null || sysctl -n hw.logicalcpu)
 
 echo "Build completed successfully in ${BUILD_TYPE} mode."
