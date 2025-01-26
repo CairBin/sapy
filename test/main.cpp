@@ -251,6 +251,20 @@ int main(){
         cout << ", type: " << typeid(list3[i]).name() << endl;
     }
 
+    PList list4({1, 1, 4, 5, "N"});
+    PList list5({1, 2});
+
+    cout << "list4 + list5: " << list4 + list5 << endl;
+    list4.extend({1, 2});
+    cout << "list4.extend({1, 2}): " << list4 << endl;
+    list4 += list5;
+    cout << "list4 += list5: " << list4 << endl;
+
+    cout << "list4.index(\"N\"): " << list4.index("N") << endl;
+
+    list4.reverse();
+    cout << "reversed list4: " << list4 << endl;
+
     PDict dict;
     dict[PString("key1")] = PString("value1");
     dict[PString("key2")] = PString("value2");
