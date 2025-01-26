@@ -7,6 +7,16 @@ size_t PSet::HashFunc::operator()(const PAnyWrapper &obj) const {
     return obj.hash();
 }
 
+size_t PSet::hash() const {
+    size_t result = 0;
+    for (auto it = container_.begin(); it != container_.end(); ++it) {
+        result ^= it->hash();
+    }
+    return result;
+}
+
+
+
 PString PSet::toString() const {
     if(container_.empty()){
         return "set()";
@@ -149,6 +159,18 @@ PSet PSet::operator-(const PAnyWrapper& other) const {
     PSet result = copy();
     result.discard(other);
     return result;
+}
+
+bool PSet::operator==(const PSet& other) const {
+    if (container_.size() != other.container_.size()) {
+        return false;
+    }
+    for (auto it = container_.begin(); it != container_.end(); ++it) {
+        if (!other.contain(*it)) {
+            return false;
+        }
+    }
+    return true;
 }
 
 }

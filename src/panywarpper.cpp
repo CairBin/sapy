@@ -73,4 +73,36 @@ size_t PAnyWrapper::hash() const {
     }
 }
 
+bool PAnyWrapper::operator==(const PAnyWrapper& other) const {
+    const std::type_info& ti1 = data_.type();
+    const std::type_info& ti2 = other.data_.type();
+    if (ti1 != ti2) {
+        return false;
+    }
+    if(ti1 == typeid(int)){
+        return std::any_cast<int>(data_) == std::any_cast<int>(other.data_);
+    }else if(ti1 == typeid(double)){
+        return std::any_cast<double>(data_) == std::any_cast<double>(other.data_);
+    }else if(ti1 == typeid(std::string)){
+        return std::any_cast<std::string>(data_) == std::any_cast<std::string>(other.data_);
+    }else if(ti1 == typeid(const char*)){
+        return std::any_cast<const char*>(data_) == std::any_cast<const char*>(other.data_);
+    }else if(ti1 == typeid(char)){
+        return std::any_cast<char>(data_) == std::any_cast<char>(other.data_);
+    }else if(ti1 == typeid(PString)){
+        return std::any_cast<PString>(data_) == std::any_cast<PString>(other.data_);
+    }else if(ti1 == typeid(PList)){
+        return std::any_cast<PList>(data_) == std::any_cast<PList>(other.data_);
+    }else if(ti1 == typeid(PDict)){
+        return std::any_cast<PDict>(data_) == std::any_cast<PDict>(other.data_);
+    }else if(ti1 == typeid(PSet)){
+        return std::any_cast<PSet>(data_) == std::any_cast<PSet>(other.data_);
+    }else if(ti1 == typeid(char32_t)){
+        return std::any_cast<char32_t>(data_) == std::any_cast<char32_t>(other.data_);
+    }else if(ti1 == typeid(std::u32string)){
+        return std::any_cast<std::u32string>(data_) == std::any_cast<std::u32string>(other.data_);
+    }
+    return this->hash() == other.hash(); // Not sure if this is a good idea
+}
+
 } // namespace sapy

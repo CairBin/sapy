@@ -56,7 +56,11 @@ public:
     virtual PString toString() const override;
     PAnyWrapper& operator[](const PAnyWrapper& key);
     const PAnyWrapper& operator[](const PAnyWrapper& key) const;
-    
+
+    bool operator==(const PDict& other) const;
+    inline bool operator!=(const PDict& other) const {
+        return !(*this == other);
+    }
     
     using iterator = std::unordered_map<PAnyWrapper, PAnyWrapper, HashFunc>::iterator;
     using const_iterator = std::unordered_map<PAnyWrapper, PAnyWrapper, HashFunc>::const_iterator;  

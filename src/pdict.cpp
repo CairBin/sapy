@@ -54,5 +54,17 @@ const PAnyWrapper& PDict::operator[](const PAnyWrapper& key) const {
     return it->second;
 }
 
+bool PDict::operator==(const PDict& other) const {
+    if (container_.size() != other.container_.size()) {
+        return false;
+    }
+    for (auto it = container_.begin(); it != container_.end(); ++it) {
+        auto other_it = other.container_.find(it->first);
+        if (other_it == other.container_.end() || it->second != other_it->second) {
+            return false;
+        }
+    }
+    return true;
+}
 
 }

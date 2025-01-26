@@ -24,3 +24,15 @@ PString PList::toString() const {
     return result;
 }
 }
+
+bool sapy::PList::operator==(const PList& other) const {
+    if (data_.size() != other.data_.size()) {
+        return false;
+    }
+    for (size_t i = 0; i < data_.size(); i++) {
+        if (data_[i] != other.data_[i]) {
+            return false;
+        }
+    }
+    return true;
+}

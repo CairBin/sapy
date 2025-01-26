@@ -63,6 +63,10 @@ public:
         data_.emplace_back(item);
     }
 
+    bool operator==(const PList& other) const;
+    inline bool operator!=(const PList& other) const {
+        return !(*this == other);
+    }
     using iterator = std::vector<PAnyWrapper>::iterator;
     using const_iterator = std::vector<PAnyWrapper>::const_iterator;  
     using value_type = PAnyWrapper;

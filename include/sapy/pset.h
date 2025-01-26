@@ -47,6 +47,7 @@ private:
 public: 
     PSet() = default;
     PSet(std::initializer_list<PAnyWrapper> init) : container_(init){};
+    size_t hash() const override;
     PString toString() const override;
     void add(const PAnyWrapper& elem);
     PSet copy() const;
@@ -66,6 +67,10 @@ public:
     
     PSet operator-(const PSet& other) const;
     PSet operator-(const PAnyWrapper& other) const;
+    bool operator==(const PSet& other) const;
+    inline bool operator!=(const PSet& other) const {
+        return !(*this == other);
+    }
 
     using iterator = std::unordered_set<PAnyWrapper, HashFunc>::iterator;
     using const_iterator = std::unordered_set<PAnyWrapper, HashFunc>::const_iterator;

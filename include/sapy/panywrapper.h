@@ -62,7 +62,10 @@ public:
 
         return unwrap<U>();
     }
-
+    bool operator==(const PAnyWrapper& other) const;
+    inline bool operator!=(const PAnyWrapper& other) const {
+        return !(*this == other);
+    }
     virtual PString toString() const override;
     bool isString() const;
     PString getString() const;

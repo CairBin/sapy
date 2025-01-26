@@ -12,16 +12,16 @@ public:
     virtual ~PObject() {}
     virtual PString toString() const = 0;
     virtual size_t hash() const{
-        return reinterpret_cast<size_t>(this);
+            return reinterpret_cast<size_t>(this);
     }
 
-    virtual bool operator==(const PObject &other) const{
-        return hash() == other.hash();
-    }
+    // virtual bool operator==(const PObject &other) const{
+    //     return hash() == other.hash();
+    // }
 
-    bool operator!=(const PObject &other) const{
-        return !(*this == other);
-    }
+    // bool operator!=(const PObject &other) const{
+    //     return !(*this == other);
+    // }
 
 private:  
     virtual void _print(std::ostream& os) const = 0;
