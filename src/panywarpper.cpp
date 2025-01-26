@@ -44,9 +44,11 @@ size_t PAnyWrapper::hash() const {
     } else if (ti == typeid(double)) {
         return std::hash<double>{}(std::any_cast<double>(data_));
     } else if (ti == typeid(std::string)) {
-        return std::hash<std::string>{}(std::any_cast<std::string>(data_));
+        //return std::hash<std::string>{}(std::any_cast<std::string>(data_));
+        return PString(std::any_cast<std::string>(data_)).hash();
     } else if (ti == typeid(const char*)) {
-        return std::hash<std::string>{}(std::any_cast<const char*>(data_));
+        //return std::hash<std::string>{}(std::any_cast<const char*>(data_));
+        return PString(std::any_cast<const char*>(data_)).hash();
     } else if (ti == typeid(char)) {
         return std::hash<char>{}(std::any_cast<char>(data_));
     } else if (ti == typeid(PString)) {
