@@ -9,6 +9,7 @@
 #include "sapy/plist.h"
 #include "sapy/piterator.h"
 #include "sapy/pdict.h"
+#include "sapy/pset.h"
 
 using namespace sapy;
 using namespace std;
@@ -261,6 +262,50 @@ int main(){
     for(auto iter: dict){
         cout << iter.first << ": " << iter.second <<std::endl;
     }
+
+    PSet s1 = {1,2,3,4,5,6,7,8,9,10};
+    PSet s2 = {1,2,3,4,5,"str","hello", "", 3.14159};
+
+    cout <<"s1: " << s1 << endl;
+    cout <<"s2: " << s2 << endl;
+
+    for(auto item: s1){
+        cout << item << endl;
+    }
+
+    s1.clear();
+    cout << "s1.clear() = " << s1 << endl;
+    
+    for(int i = 0; i < 10; i++){
+        s1.add(i);
+    }
+    cout << "s1.add(0-9) = " << s1 << endl;
+
+    cout << "s1.contain(5) = " << s1.contain(5) << endl;
+    cout << "s1.contain(10) = " << s1.contain(10) << endl;
+
+    s1.remove(5);
+    cout << "s1.remove(5) -> s1:  " << s1 << endl;
+    
+
+    cout << "s1.difference(s2) = " << s1.difference(s2) << endl;
+    cout << "s1.intersection(s2) = " << s1.intersection(s2) << endl;
+    cout << "s1.union_(s2) = " << s1.union_(s2) << endl;
+    cout << "s1.symmetric_difference(s2) = " << s1.symmetric_difference(s2) << endl;
+    cout << "s1.isdisjoint(s2) = " << s1.isdisjoint(s2) << endl;
+    cout << "s1.issubset(s2) = " << s1.issubset(s2) << endl;
+    cout << "s1.issuperset(s2) = " << s1.issuperset(s2) << endl;
+    //cout << "s1.pop() = " << s1.pop() << endl;
+    cout << "s1.copy() = " << s1.copy() << endl;
+    cout << "s1.size() = " << s1.size() << endl;
+    s1.intersection_update(s2);
+    cout << "s1.intersection_update(s2) -> s1 = " << s1 << endl;
+    s1.difference_update(s2);
+    cout << "s1.differece_update(s2) -> s1 = " << s1 << endl;
+    s1.symmetric_difference_update(s2);
+    cout << "s1.symmetric_difference_update(s2) -> s1 = " << s1 << endl;
+
+
 
     return 0;
 }
