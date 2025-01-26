@@ -58,8 +58,18 @@ size_t PAnyWrapper::hash() const {
         return std::hash<char>{}(std::any_cast<char>(data_));
     } else if (ti == typeid(PString)) {
         return std::any_cast<PString>(data_).hash();
+    } else if (ti == typeid(PList)) {
+        return std::any_cast<PList>(data_).hash();
+    } else if (ti == typeid(PDict)) {
+        return std::any_cast<PDict>(data_).hash();
+    } else if (ti == typeid(PSet)) {
+        return std::any_cast<PSet>(data_).hash();
+    } else if(ti == typeid(char32_t)) {
+        return std::hash<char32_t>{}(std::any_cast<char32_t>(data_));
+    } else if(ti == typeid(std::u32string)) {
+        return std::hash<std::u32string>{}(std::any_cast<std::u32string>(data_));
     } else {
-        return reinterpret_cast<size_t>(this);
+        return std::hash<std::string>()(ti.name());
     }
 }
 

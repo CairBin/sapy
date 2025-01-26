@@ -340,6 +340,8 @@ int main(){
 
     s4.add(PSet({"1", "2", "4"}));
 
+    cout << "s4 = " << s4 << endl;
+
     for(auto it = s4.begin(); it != s4.end(); it++){
         for(auto jt = it; jt != s4.end(); jt++){
             if(it == jt) continue;
@@ -348,6 +350,13 @@ int main(){
             cout << "elem1: " << elem1 << ", elem2: " << elem2 << endl;
         }
     }
-
+    s4.add(PSet({"1", "2", "3"}));
+    cout << "s4.add(PSet({\"1\", \"2\", \"3\"})) -> s4 = " << s4 << endl;
+    s4.discard(PSet({"1", "2", "3"}));
+    cout << "s4.discard(PSet({\"1\", \"2\", \"3\"})) -> s4 = " << s4 << endl;
+    s4.add(2);
+    cout << "s4.add(2) -> s4 = " << s4 << endl;
+    s4.add(2);
+    cout << "s4.add(2) -> s4 = " << s4 << endl;
     return 0;
 }
