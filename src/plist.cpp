@@ -36,3 +36,7 @@ bool sapy::PList::operator==(const PList& other) const {
     }
     return true;
 }
+
+void sapy::PList::reverse(){
+    std::reverse(data_.begin(), data_.end());
+}

@@ -14,6 +14,8 @@
 #include "sapy/plist.h"
 #include "sapy/panywrapper.h"
 #include "sapy/pdict.h"
+#include "sapy/pcollection_interface.h"
+
 namespace sapy{
 
 class PList;
@@ -21,7 +23,7 @@ class PAnyWrapper;
 class PDict;
 class PBytes;
 
-class PString : public PObject {
+class PString : public PObject, public PReversableInterface{
 public:
     PString();                           
     PString(const PString&) = default;   
@@ -39,7 +41,7 @@ public:
     PString substr(size_t start, size_t end=std::u32string::npos) const;
     
     
-
+    void reverse() override;
     PString captilize() const;
     PString casefold() const;
     PString center(size_t width, char fillchar=' ') const;

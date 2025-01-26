@@ -51,4 +51,10 @@ public:
         return static_cast<const Derived *>(this)->sizeImpl();
     }
 };
+
+class PReversableInterface{
+public:
+    virtual void reverse() = 0;
+};
+
 }

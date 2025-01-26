@@ -8,7 +8,7 @@
 namespace sapy{
 class PString;
 class PAnyWrapper;
-class PList : public PObject, public PCollectionInterface<PList> {
+class PList : public PObject, public PCollectionInterface<PList>, public PReversableInterface {
 private:
     template<typename... Args>
     void appendImpl(Args&&... args) {
@@ -144,9 +144,7 @@ public:
         data_.insert(data_.begin() + pos, elem);
     }
 
-    void reverse(){
-        std::reverse(data_.begin(), data_.end());
-    }
+    void reverse() override;
 
 private:
     virtual void _print(std::ostream &os) const override;

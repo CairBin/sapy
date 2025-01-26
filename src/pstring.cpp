@@ -53,6 +53,10 @@ size_t PString::length() const
     return _data.size();
 }
 
+void PString::reverse(){
+    _data = std::u32string(_data.rbegin(), _data.rend());
+}
+
 PString PString::lstrip(const PString &__strp_str) const
 {
     size_t pos = _data.find_first_not_of(__strp_str._data);
