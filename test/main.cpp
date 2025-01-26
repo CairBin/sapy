@@ -202,6 +202,9 @@ int main(){
     cout << str_equal_.toString() + " == " << str_equal_other3 << " = " << (str_equal_ == str_equal_other3) << std::endl;
     
 
+    PAnyWrapper wrap = "Hello, World!";
+    PString wrap_str = wrap;
+    std::cout << wrap_str << std::endl;
 
     PList list2;
     list2.append(42);               // int

@@ -22,12 +22,38 @@ public:
 
     template <typename T>
     T unwrap() const{
-        return std::any_cast<T>(data_);
+        try {
+            return std::any_cast<T>(data_);
+        } catch (const std::bad_any_cast&) {
+            throw std::bad_cast();
+        }
     }
     virtual size_t hash() const override;
 
     template <typename U>
     operator U() const{
+        const std::type_info& ti = data_.type();
+
+        if (ti == typeid(const char*)) {
+            if constexpr (std::is_same<U, PString>::value) {
+                return PString(unwrap<const char*>());
+            }
+            if constexpr (std::is_convertible<const char*, U>::value) {
+                return unwrap<const char*>(); 
+            }
+            throw std::bad_cast(); 
+        }
+
+        if (ti == typeid(std::string)) {
+            if constexpr (std::is_same<U, PString>::value) {
+                return PString(unwrap<std::string>()); 
+            }
+            if constexpr (std::is_convertible<std::string, U>::value) {
+                return unwrap<std::string>(); 
+            }
+            throw std::bad_cast(); 
+        }
+
         return unwrap<U>();
     }
 
