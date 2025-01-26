@@ -141,4 +141,14 @@ void PSet::update(const PSet& other) {
     }
 }
 
+PSet PSet::operator-(const PSet& other) const {
+    return difference(other);
+}
+
+PSet PSet::operator-(const PAnyWrapper& other) const {
+    PSet result = copy();
+    result.discard(other);
+    return result;
+}
+
 }

@@ -64,6 +64,9 @@ public:
     PSet union_(const PSet& other) const;
     void update(const PSet& other);
     
+    PSet operator-(const PSet& other) const;
+    PSet operator-(const PAnyWrapper& other) const;
+
     using iterator = std::unordered_set<PAnyWrapper, HashFunc>::iterator;
     using const_iterator = std::unordered_set<PAnyWrapper, HashFunc>::const_iterator;
     using value_type = PAnyWrapper;
