@@ -325,5 +325,16 @@ int main(){
     s1.remove("hello");
     cout << "s1.remove(\"hello\") -> s1 = " << s1 << endl;
 
+    PSet s3 = {PSet({1,2,3}), PSet({4,5,6}), PSet({7,8,9})};
+    cout << "s3 = " << s3 << endl;
+    for(auto item: s3){
+        cout << item << endl;
+    }
+
+    for(auto iter = s3.begin(); iter != s3.end(); iter++){
+        PSet item = *iter;
+        cout << item << endl;
+    }
+
     return 0;
 }
