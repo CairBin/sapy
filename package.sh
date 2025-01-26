@@ -1,3 +1,4 @@
 #!/bin/sh
 
-conan create . 
+conan create . --build=missing -s build_type=Debug
+conan create . --build=missing -s build_type=Release
