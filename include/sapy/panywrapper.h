@@ -13,7 +13,7 @@ namespace sapy{
 
 class PAnyWrapper : public PObject{
 public:
-    PAnyWrapper() : data_(nullptr) {}
+    PAnyWrapper() = default;
     template <typename T>
     PAnyWrapper(T val)
         : data_(std::move(val)) {}
@@ -22,9 +22,15 @@ public:
 
     template <typename T>
     T unwrap() const{
+        if (!data_.has_value()) {
+            std::cerr << "bad any cast: std::any is empty" << std::endl;
+            throw std::bad_cast();
+        }
         try {
             return std::any_cast<T>(data_);
         } catch (const std::bad_any_cast&) {
+            const std::type_info& ti = data_.type();
+            std::cerr << "bad any cast: " << ti.name() << std::endl;
             throw std::bad_cast();
         }
     }

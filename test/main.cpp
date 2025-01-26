@@ -336,5 +336,18 @@ int main(){
         cout << item << endl;
     }
 
+    PSet s4 = {PSet({"¬3"}), PSet({"1", "2", "3"})};
+
+    s4.add(PSet({"1", "2", "4"}));
+
+    for(auto it = s4.begin(); it != s4.end(); it++){
+        for(auto jt = it; jt != s4.end(); jt++){
+            if(it == jt) continue;
+            PSet elem1 = *it;
+            PSet elem2 = *jt;
+            cout << "elem1: " << elem1 << ", elem2: " << elem2 << endl;
+        }
+    }
+
     return 0;
 }
