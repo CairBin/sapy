@@ -305,7 +305,8 @@ int main(){
     s1.symmetric_difference_update(s2);
     cout << "s1.symmetric_difference_update(s2) -> s1 = " << s1 << endl;
 
-
+    s1.remove("hello");
+    cout << "s1.remove(\"hello\") -> s1 = " << s1 << endl;
 
     return 0;
 }
