@@ -189,6 +189,20 @@ int main(){
     cout << str_encode.toString() + ".encode(\"utf-32\") = " << str_encode.encode("utf-32").toString() <<
     "len = " << str_encode.encode("utf-32").length() << std::endl;
 
+    PString str_equal = "你好,abc";
+    PString str_equal_other = "你好,abc";
+    const char* str_equal_other2 = "你好,abc";
+    std::string str_equal_other3 = "你好,abc";
+    PString str_equal_ = "您好,abc";
+    cout << str_equal.toString() + " == " << str_equal_other.toString() << " = " << (str_equal == str_equal_other) << std::endl;
+    cout << str_equal.toString() + " == " << str_equal_other2 << " = " << (str_equal == str_equal_other2) << std::endl;
+    cout << str_equal.toString() + " == " << str_equal_other3 << " = " << (str_equal == str_equal_other3) << std::endl;
+    cout << str_equal_.toString() + " == " << str_equal_other.toString() << " = " << (str_equal_ == str_equal_other) << std::endl;
+    cout << str_equal_.toString() + " == " << str_equal_other2 << " = " << (str_equal_ == str_equal_other2) << std::endl;
+    cout << str_equal_.toString() + " == " << str_equal_other3 << " = " << (str_equal_ == str_equal_other3) << std::endl;
+    
+
+
     PList list2;
     list2.append(42);               // int
     list2.append(3.14159);          // double
