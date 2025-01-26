@@ -769,6 +769,16 @@ bool PString::operator!=(const PString &other) const
     return !(*this == other);
 }
 
+bool PString::operator<(const PString &other) const
+{
+    return _data < other._data;
+}
+
+bool PString::operator>(const PString &other) const
+{
+    return _data > other._data;
+}
+
 const PString PString::operator[](size_t index) const
 {
     if (index >= _data.size())
@@ -905,5 +915,8 @@ PString operator+(const std::string &lhs, const PString &rhs)
 {
     return PString(lhs) + rhs;
 }
+
+
+
 
 } // namespace sapy

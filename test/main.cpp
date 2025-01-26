@@ -202,6 +202,13 @@ int main(){
     cout << str_equal_.toString() + " == " << str_equal_other3 << " = " << (str_equal_ == str_equal_other3) << std::endl;
     
 
+    std::vector<PString> vec = {"a", "b", "c", "d", "e","aaa","abc","ce"};
+    std::sort(vec.begin(), vec.end());
+    for(auto item: vec){
+        cout << item << ",";
+    }
+    cout << endl;
+
     PAnyWrapper wrap = "Hello, World!";
     PString wrap_str = wrap;
     std::cout << wrap_str << std::endl;

@@ -113,7 +113,14 @@ public:
     
     bool operator==(const PString& other) const;
     bool operator!=(const PString& other) const;
-
+    bool operator<(const PString& other) const;
+    inline bool operator>=(const PString& other) const {
+        return !(*this < other);
+    }
+    bool operator>(const PString& other) const;
+    inline bool operator<=(const PString& other) const {
+        return !(*this > other);
+    }
     
     const PString operator[](size_t index) const;
 
