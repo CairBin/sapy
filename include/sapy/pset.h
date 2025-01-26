@@ -46,6 +46,7 @@ private:
 
 public: 
     PSet() = default;
+    PSet(const PSet& other) : container_(other.container_){};
     PSet(std::initializer_list<PAnyWrapper> init) : container_(init){};
     size_t hash() const override;
     PString toString() const override;
