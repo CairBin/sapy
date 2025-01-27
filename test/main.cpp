@@ -201,6 +201,7 @@ int main(){
     cout << str_equal_.toString() + " == " << str_equal_other2 << " = " << (str_equal_ == str_equal_other2) << std::endl;
     cout << str_equal_.toString() + " == " << str_equal_other3 << " = " << (str_equal_ == str_equal_other3) << std::endl;
     
+    cout << std::format("str_equal: {}",str_equal) << std::endl;
 
     std::vector<PString> vec = {"a", "b", "c", "d", "e","aaa","abc","ce"};
     std::sort(vec.begin(), vec.end());

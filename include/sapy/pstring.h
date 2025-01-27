@@ -171,4 +171,16 @@ private:
 PString operator+(const char* lhs, const PString& rhs);
 PString operator+(const std::string& lhs, const PString& rhs);
 
+
 }
+
+
+template <>
+struct std::formatter<sapy::PString> {
+    constexpr auto parse(std::format_parse_context& ctx) {
+        return ctx.begin();
+    }
+    auto format(const sapy::PString& pstr, std::format_context& ctx) const {
+        return std::format_to(ctx.out(), "{}", static_cast<std::string>(pstr));
+    }
+};
