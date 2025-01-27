@@ -265,6 +265,13 @@ int main(){
     list4.reverse();
     cout << "reversed list4: " << list4 << endl;
 
+    PList list6 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9 , "hello", PString("hello"), PString("hello"),"str"};
+    cout << "list6 =" << list6 << endl;
+    cout << "list6.count(9): " << list6.count(9) << endl;
+    cout << "list6.count(\"hello\"): " << list6.count("hello") << endl;
+    cout << "list6.count(PString(\"hello\")): " << list6.count(PString("hello")) << endl;
+
+
     PDict dict;
     dict[PString("key1")] = PString("value1");
     dict[PString("key2")] = PString("value2");
