@@ -101,8 +101,12 @@ bool PAnyWrapper::operator==(const PAnyWrapper& other) const {
         return std::any_cast<char32_t>(data_) == std::any_cast<char32_t>(other.data_);
     }else if(ti1 == typeid(std::u32string)){
         return std::any_cast<std::u32string>(data_) == std::any_cast<std::u32string>(other.data_);
+    }else {
+
+        // Maybe we should **register a new type** for PAnyWrapper, and use that type to compare
+        throw std::runtime_error("Unsupported type for PAnyWrapper == operator:" + std::string(ti1.name()));
+        return false;
     }
-    return this->hash() == other.hash(); // Not sure if this is a good idea
 }
 
 } // namespace sapy
