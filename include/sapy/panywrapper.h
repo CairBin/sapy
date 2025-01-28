@@ -62,6 +62,12 @@ public:
 
         return unwrap<U>();
     }
+
+    template <typename T>
+    bool is() const {
+        return data_.type() == typeid(T);
+    }
+
     bool operator==(const PAnyWrapper& other) const;
     inline bool operator!=(const PAnyWrapper& other) const {
         return !(*this == other);

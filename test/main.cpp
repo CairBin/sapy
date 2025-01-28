@@ -224,6 +224,16 @@ int main(){
     list2.appendSingle(list);
     cout << list2 << endl;
 
+    cout << "list2[0].is<int>" <<list2[0].is<int>() << endl;
+    cout << "list2[1].is<double>" <<list2[1].is<double>() << endl;
+    cout << "list2[2].is<std::string>" <<list2[2].is<std::string>() << endl;
+    cout << "list2[3].is<const char*>" <<list2[3].is<const char*>() << endl;
+    cout << "list2[4].is<char>" <<list2[4].is<char>() << endl;
+    cout << "list2[5].is<PString>" <<list2[5].is<PString>() << endl;
+    cout << "list2[5].is<PList>" <<list2[5].is<PList>() << endl;
+    cout << "list2[6].is<PList>" <<list2[6].is<PList>() << endl;
+
+
     PList list_init1 = {1,2,3,4,5,6,7,8,9,10};
     cout << list_init1 << endl;
     PList list_init2 = {"Hello", "World", "!", 1, 2, 3, 3.14159};
