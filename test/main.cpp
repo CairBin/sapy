@@ -290,22 +290,24 @@ int main(){
     list7.sort(nullptr, nullptr, true);
     cout << "list7.sort(reverse=True) = " << list7 << endl;
 
-    list7.sort([](const PAnyWrapper& a, const PAnyWrapper& b){
-        return a.unwrap<int>() < b.unwrap<int>();
+    list7.sort([](const int& a, const int& b){
+        return a < b;
     });
     cout << "list7.sort(cmp) = " << list7 << endl;
 
     PList list8 = {PList({1,2,3}), PList({0,5,6}), PList({7,8,9})};
 
-    cout << "list8 = " << list8 << endl;
-    list8.sort(nullptr, [](const PAnyWrapper& a){
-        return a.unwrap<PList>()[0];
+
+    list8.sort(nullptr, [](const PList& a){
+        return a[0];
     });
+
     cout << "list8.sort(key) = " << list8 << endl;
-    list8.sort([](const PAnyWrapper& a, const PAnyWrapper& b){
-        return a.unwrap<int>() < b.unwrap<int>();
-    }, [](const PAnyWrapper& a){
-        return a.unwrap<PList>()[1];
+
+    list8.sort([](const int& a, const int& b){
+        return a < b;
+    }, [](const PList& a){
+        return a[1];
     });
     cout << "list8.sort(cmp, key) = " << list8 << endl;
 
