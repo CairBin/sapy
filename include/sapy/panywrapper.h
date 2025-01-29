@@ -72,6 +72,15 @@ public:
     inline bool operator!=(const PAnyWrapper& other) const {
         return !(*this == other);
     }
+
+    bool operator<(const PAnyWrapper& other) const;
+    bool operator>(const PAnyWrapper& other) const;
+    inline bool operator<=(const PAnyWrapper& other) const{
+        return !(*this > other);
+    }
+    inline bool operator>=(const PAnyWrapper& other) const{
+        return !(*this < other);
+    }
     virtual PString toString() const override;
     bool isString() const;
     PString getString() const;

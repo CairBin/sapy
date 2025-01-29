@@ -72,6 +72,19 @@ public:
     inline bool operator!=(const PSet& other) const {
         return !(*this == other);
     }
+    inline bool operator<(const PSet& other) const {
+        return issubset(other) && size() < other.size();
+    }
+    inline bool operator<=(const PSet& other) const {
+        return issubset(other);
+    }
+    inline bool operator>(const PSet& other) const {
+        return !(*this <= other);
+    }
+    inline bool operator>=(const PSet& other) const {
+        return !(*this < other);
+    }
+
 
     using iterator = std::unordered_set<PAnyWrapper, HashFunc>::iterator;
     using const_iterator = std::unordered_set<PAnyWrapper, HashFunc>::const_iterator;

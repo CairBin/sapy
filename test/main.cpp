@@ -282,6 +282,32 @@ int main(){
     cout << "list6.count(\"hello\"): " << list6.count("hello") << endl;
     cout << "list6.count(PString(\"hello\")): " << list6.count(PString("hello")) << endl;
 
+    PList list7 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9};
+
+    list7.sort();
+    cout << "list7.sort() = " << list7 << endl;
+
+    list7.sort(nullptr, nullptr, true);
+    cout << "list7.sort(reverse=True) = " << list7 << endl;
+
+    list7.sort([](const PAnyWrapper& a, const PAnyWrapper& b){
+        return a.unwrap<int>() < b.unwrap<int>();
+    });
+    cout << "list7.sort(cmp) = " << list7 << endl;
+
+    PList list8 = {PList({1,2,3}), PList({0,5,6}), PList({7,8,9})};
+
+    cout << "list8 = " << list8 << endl;
+    list8.sort(nullptr, [](const PAnyWrapper& a){
+        return a.unwrap<PList>()[0];
+    });
+    cout << "list8.sort(key) = " << list8 << endl;
+    list8.sort([](const PAnyWrapper& a, const PAnyWrapper& b){
+        return a.unwrap<int>() < b.unwrap<int>();
+    }, [](const PAnyWrapper& a){
+        return a.unwrap<PList>()[1];
+    });
+    cout << "list8.sort(cmp, key) = " << list8 << endl;
 
     PDict dict;
     dict[PString("key1")] = PString("value1");

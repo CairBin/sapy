@@ -23,9 +23,8 @@ PString PList::toString() const {
     result += "]";
     return result;
 }
-}
 
-bool sapy::PList::operator==(const PList& other) const {
+bool PList::operator==(const PList& other) const {
     if (data_.size() != other.data_.size()) {
         return false;
     }
@@ -36,3 +35,27 @@ bool sapy::PList::operator==(const PList& other) const {
     }
     return true;
 }
+
+void PList::sort(
+    std::function<bool(const PAnyWrapper&, const PAnyWrapper&)> cmp,
+    std::function<PAnyWrapper(const PAnyWrapper&)> key,
+    bool reverse
+){
+    sortT<PAnyWrapper>(cmp, key, reverse);
+}
+
+
+bool PList::operator<(const PList& other) const {
+    if(data_.size() < other.data_.size()){
+        return true;
+    }
+    for(size_t i = 0; i < data_.size(); i++){
+        if(data_[i] < other.data_[i]){
+            return true;
+        }
+    }
+    return false;
+}
+
+}
+
