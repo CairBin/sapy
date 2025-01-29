@@ -61,6 +61,23 @@ public:
     inline bool operator!=(const PDict& other) const {
         return !(*this == other);
     }
+
+    inline bool operator<(const PDict& other) const {
+        throw std::runtime_error("Unsupported type for PDict < operator");
+        return false;
+    }
+    inline bool operator>(const PDict& other) const {
+        throw std::runtime_error("Unsupported type for PDict > operator");
+        return false;
+    }
+    inline bool operator<=(const PDict& other) const {
+        throw std::runtime_error("Unsupported type for PDict <= operator");
+        return false;
+    }
+    inline bool operator>=(const PDict& other) const {
+        throw std::runtime_error("Unsupported type for PDict >= operator");
+        return false;
+    }
     
     using iterator = std::unordered_map<PAnyWrapper, PAnyWrapper, HashFunc>::iterator;
     using const_iterator = std::unordered_map<PAnyWrapper, PAnyWrapper, HashFunc>::const_iterator;  

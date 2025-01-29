@@ -62,9 +62,24 @@ public:
 
         return unwrap<U>();
     }
+
+    template <typename T>
+    bool is() const {
+        return data_.type() == typeid(T);
+    }
+
     bool operator==(const PAnyWrapper& other) const;
     inline bool operator!=(const PAnyWrapper& other) const {
         return !(*this == other);
+    }
+
+    bool operator<(const PAnyWrapper& other) const;
+    bool operator>(const PAnyWrapper& other) const;
+    inline bool operator<=(const PAnyWrapper& other) const{
+        return !(*this > other);
+    }
+    inline bool operator>=(const PAnyWrapper& other) const{
+        return !(*this < other);
     }
     virtual PString toString() const override;
     bool isString() const;

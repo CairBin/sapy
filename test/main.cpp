@@ -202,6 +202,7 @@ int main(){
     cout << str_equal_.toString() + " == " << str_equal_other2 << " = " << (str_equal_ == str_equal_other2) << std::endl;
     cout << str_equal_.toString() + " == " << str_equal_other3 << " = " << (str_equal_ == str_equal_other3) << std::endl;
     
+    cout << std::format("str_equal: {}",str_equal) << std::endl;
 
     std::vector<PString> vec = {"a", "b", "c", "d", "e","aaa","abc","ce"};
     std::sort(vec.begin(), vec.end());
@@ -223,6 +224,16 @@ int main(){
     list2.append(PString("PString"));
     list2.appendSingle(list);
     cout << list2 << endl;
+
+    cout << "list2[0].is<int>" <<list2[0].is<int>() << endl;
+    cout << "list2[1].is<double>" <<list2[1].is<double>() << endl;
+    cout << "list2[2].is<std::string>" <<list2[2].is<std::string>() << endl;
+    cout << "list2[3].is<const char*>" <<list2[3].is<const char*>() << endl;
+    cout << "list2[4].is<char>" <<list2[4].is<char>() << endl;
+    cout << "list2[5].is<PString>" <<list2[5].is<PString>() << endl;
+    cout << "list2[5].is<PList>" <<list2[5].is<PList>() << endl;
+    cout << "list2[6].is<PList>" <<list2[6].is<PList>() << endl;
+
 
     PList list_init1 = {1,2,3,4,5,6,7,8,9,10};
     cout << list_init1 << endl;
@@ -265,9 +276,6 @@ int main(){
 
     list4.reverse();
     cout << "reversed list4: " << list4 << endl;
-
-    PList list4_1 = reversed(list4);
-    cout << "list4_1: " << list4_1 << endl;
 
     PDict dict;
     dict[PString("key1")] = PString("value1");

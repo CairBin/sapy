@@ -112,7 +112,14 @@ public:
     static std::u32string fromUTF8ToUTF32(const std::string& utf8Str);
     static std::string fromUTF32ToUTF8(const std::u32string& utf32Str);
 
-    
+    operator const std::u32string&() const {
+        return _data;
+    }
+    operator std::string() const {
+        return std::move(fromUTF32ToUTF8(_data));
+    }
+
+
     bool operator==(const PString& other) const;
     bool operator!=(const PString& other) const;
     bool operator<(const PString& other) const;
@@ -166,4 +173,16 @@ private:
 PString operator+(const char* lhs, const PString& rhs);
 PString operator+(const std::string& lhs, const PString& rhs);
 
+
 }
+
+
+template <>
+struct std::formatter<sapy::PString> {
+    constexpr auto parse(std::format_parse_context& ctx) {
+        return ctx.begin();
+    }
+    auto format(const sapy::PString& pstr, std::format_context& ctx) const {
+        return std::format_to(ctx.out(), "{}", static_cast<std::string>(pstr));
+    }
+};

@@ -4,6 +4,7 @@
 #include "sapy/piterator.h"
 // #include "sapy/pstring.h"
 #include <algorithm>
+#include <functional>
 
 namespace sapy{
 class PString;
@@ -70,6 +71,21 @@ public:
     PList& operator=(const PList& other){
         return *this;
     }
+
+    bool operator<(const PList& other) const;
+
+    inline bool operator<=(const PList& other) const{
+        return (*this)<other || (*this)==other;
+    }
+
+    inline bool operator>(const PList& other) const{
+        return (!((*this)<other)) && !(*this == other);
+    }
+
+    inline bool operator>=(const PList& other) const{
+        return !((*this)<other);
+    }
+
 
 public:
 
@@ -145,6 +161,47 @@ public:
     }
 
     void reverse() override;
+
+    template <typename T>
+    inline void sortT(
+        std::function<bool(const T&, const T&)> cmp = nullptr,
+        std::function<T(const T&)> key = nullptr,
+        bool reverse = false
+    ) {
+        if (key) {
+            if (cmp) {
+                std::sort(data_.begin(), data_.end(), [&](const T& a, const T& b) {
+                    T key_a = key(a);
+                    T key_b = key(b);
+                    return reverse ? cmp(key_b, key_a) : cmp(key_a, key_b);
+                });
+            } else {
+                std::sort(data_.begin(), data_.end(), [&](const T& a, const T& b) {
+                    T key_a = key(a);
+                    T key_b = key(b);
+                    return reverse ? key_b < key_a : key_a < key_b;
+                });
+            }
+        } else {
+            if (cmp) {
+                std::sort(data_.begin(), data_.end(), [&](const T& a, const T& b) {
+                    return reverse ? cmp(b, a) : cmp(a, b);
+                });
+            } else {
+                if (reverse) {
+                    std::sort(data_.begin(), data_.end(), std::greater<T>());
+                } else {
+                    std::sort(data_.begin(), data_.end(), std::less<T>());
+                }
+            }
+        }
+    }
+
+    void sort(
+        std::function<bool(const PAnyWrapper&, const PAnyWrapper&)> cmp = nullptr,
+        std::function<PAnyWrapper(const PAnyWrapper&)> key = nullptr,
+        bool reverse = false
+    );
 
 private:
     virtual void _print(std::ostream &os) const override;
