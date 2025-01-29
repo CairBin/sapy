@@ -10,6 +10,7 @@
 #include "sapy/piterator.h"
 #include "sapy/pdict.h"
 #include "sapy/pset.h"
+#include "sapy/putility.h"
 
 using namespace sapy;
 using namespace std;
@@ -264,6 +265,9 @@ int main(){
 
     list4.reverse();
     cout << "reversed list4: " << list4 << endl;
+
+    PList list4_1 = reversed(list4);
+    cout << "list4_1: " << list4_1 << endl;
 
     PDict dict;
     dict[PString("key1")] = PString("value1");

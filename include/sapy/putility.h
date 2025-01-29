@@ -2,6 +2,7 @@
 #include "sapy/pobject.h"
 #include "sapy/pcollection_interface.h"
 #include "sapy/pstring.h"
+#include <type_traits>
 
 namespace sapy{
 
@@ -17,5 +18,20 @@ size_t len(const PCollectionInterface<T>& collection){
 }
 
 size_t len(const PString& str);
+
+template <typename T>
+T reversed(T obj){
+    // PReversableInterface is base of T
+    /*
+    * class PReversableInterface{};
+    * class T : public PReversableInterface{};
+    */
+    if(!std::is_base_of_v<PReversableInterface, T>){
+        throw std::runtime_error("Not implement PReversableInterface");
+    }
+
+    obj.reverse();
+    return obj;
+}
 
 }
