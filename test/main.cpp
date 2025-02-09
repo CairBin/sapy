@@ -7,7 +7,7 @@
 #include <cassert>
 #include "sapy/pstring.h"
 #include "sapy/plist.h"
-#include "sapy/piterator.h"
+// #include "sapy/piterator.h"
 #include "sapy/pdict.h"
 #include "sapy/pset.h"
 #include "sapy/putility.h"
@@ -37,9 +37,9 @@ int main(){
         cout << str_chinese.toString() +"[" + std::to_string(i) + "] = " + str_chinese[i] << endl;
     }
 
-    for(auto iter = str_chinese.begin(); iter != str_chinese.end(); iter++){
-        cout << *iter << endl;
-    }
+    // for(auto iter = str_chinese.begin(); iter != str_chinese.end(); iter++){
+    //     cout << *iter << endl;
+    // }
 
     for(auto c : str_chinese){
         cout << PString(c) << endl;
@@ -287,8 +287,8 @@ int main(){
     dict[PString("key7")] = PString("value7");
     cout << dict << endl;
 
-    auto value1 = dict.find(PString("key1"));
-    auto value2 = dict.find(PString("key2"));
+    // auto value1 = dict.find(PString("key1"));
+    // auto value2 = dict.find(PString("key2"));
     std::cout << dict[PString("key1")]<< std::endl;
     std::cout << dict[PString("key2")] << std::endl;
     std::cout << dict[PString("key3")] << std::endl;
@@ -331,8 +331,8 @@ int main(){
     }
     cout << "s1.add(0-9) = " << s1 << endl;
 
-    cout << "s1.contain(5) = " << s1.contain(5) << endl;
-    cout << "s1.contain(10) = " << s1.contain(10) << endl;
+    cout << "s1.contain(5) = " << s1.contains(5) << endl;
+    cout << "s1.contain(10) = " << s1.contains(10) << endl;
 
     s1.remove(5);
     cout << "s1.remove(5) -> s1:  " << s1 << endl;
@@ -391,5 +391,11 @@ int main(){
     cout << "s4.add(2) -> s4 = " << s4 << endl;
     s4.add(2);
     cout << "s4.add(2) -> s4 = " << s4 << endl;
+
+    // PList s5 = {1, 2 ,3};
+    // s5.foreach<PAnyWrapper>([](PAnyWrapper& x)->void{
+    //     cout << x << endl;
+    // });
+
     return 0;
 }

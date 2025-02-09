@@ -6,6 +6,8 @@
 !/bench/
 !/include/
 !/include/sapy
+!/include/sapy/base
+!/include/sapy/collection
 !/test/
 !*.cpp
 !*.h
