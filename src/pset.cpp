@@ -3,13 +3,9 @@
 
 namespace sapy {
 
-size_t PSet::HashFunc::operator()(const PAnyWrapper &obj) const {
-    return obj.hash();
-}
-
 size_t PSet::hash() const {
     size_t result = 0;
-    for (auto it = container_.begin(); it != container_.end(); ++it) {
+    for (auto it = cbegin(); it != cend(); ++it) {
         result ^= it->hash();
     }
     return result;
@@ -18,13 +14,13 @@ size_t PSet::hash() const {
 
 
 PString PSet::toString() const {
-    if(container_.empty()){
+    if(this->count() == 0)
         return "set()";
-    }
+
     PString result = "{";
-    for (auto it = container_.begin(); it != container_.end(); ++it) {
+    for (auto it = cbegin(); it != cend(); ++it) {
         result += (it->isString()?  "\"" + it->toString() + "\"" : it->toString());
-        if (std::next(it) != container_.end()) {
+        if (it+1 != cend()) {
             result += ", ";
         }
     }
@@ -36,119 +32,82 @@ void PSet::_print(std::ostream& os) const {
     os << toString();
 }
 
-void PSet::add(const PAnyWrapper& elem) {
-    container_.insert(elem);
-}
 
 PSet PSet::copy() const {
     PSet result;
-    for (auto it = container_.begin(); it != container_.end(); ++it) {
+    for (auto it = cbegin(); it != cend(); ++it) {
         result.add(*it);
     }
     return result;
 }
 
 PSet PSet::difference(const PSet& other) const {
-    PSet result;
-    for (auto it = container_.begin(); it != container_.end(); ++it) {
-        if (!other.contain(*it)) {
-            result.add(*it);
-        }
-    }
+    PSet result(*this);
+    result.exceptWith(other);
     return result;
 }
 
 void PSet::difference_update(const PSet& other) {
-    for (auto it = container_.begin(); it != container_.end(); ) {
-        if (other.contain(*it)) {
-            it = container_.erase(it);
-        } else {
-            ++it;
-        }
-    }
+    this->exceptWith(other);
 }
 
 void PSet::discard(const PAnyWrapper& elem) {
-    container_.erase(elem);
+    this->remove(elem);
 }
 
 PSet PSet::intersection(const PSet& other) const {
-    PSet result;
-    for (auto it = container_.begin(); it != container_.end(); ++it) {
-        if (other.contain(*it)) {
-            result.add(*it);
-        }
-    }
+    PSet result(*this);
+    result.intersectWith(other);
     return result;
 }
 
 void PSet::intersection_update(const PSet& other) {
-    for (auto it = container_.begin(); it != container_.end(); ) {
-        if (!other.contain(*it)) {
-            it = container_.erase(it);
-        } else {
-            ++it;
-        }
-    }
+    this->intersectWith(other);
 }
 
 bool PSet::isdisjoint(const PSet& other) const {
-    for (auto it = container_.begin(); it != container_.end(); ++it) {
-        if (other.contain(*it)) {
-            return false;
-        }
-    }
-    return true;
+    return this->overlaps(other);
 }
 
 
 bool PSet::issubset(const PSet& other) const {
-    for (auto it = container_.begin(); it != container_.end(); ++it) {
-        if (!other.contain(*it)) {
-            return false;
-        }
-    }
-    return true;
+    return this->isSubsetOf(other);
 }
 
 bool PSet::issuperset(const PSet& other) const {
-    return other.issubset(*this);
+    return this->isSupersetOf(other);
 }
 
 PSet PSet::union_(const PSet& other) const {
     PSet result = copy();
-    for (auto it = other.container_.begin(); it != other.container_.end(); ++it) {
+    for (auto it = other.cbegin(); it != other.cend(); ++it) {
         result.add(*it);
     }
     return result;
 }
 
 PAnyWrapper PSet::pop() {
-    if (container_.empty()) {
+    if (this->count() == 0) {
         throw std::out_of_range("pop from an empty set");
     }
-    auto it = container_.begin();
+    auto it = begin();
     PAnyWrapper result = *it;
-    container_.erase(it);
+    this->remove(*it);
     return result;
 }
 
 PSet PSet::symmetric_difference(const PSet& other) const {
-    auto s1 = difference(other);
-    auto s2 = other.difference(*this);
-    return s1.union_(s2);
+    PSet result(*this);
+    result.symmetricExceptWith(other);
+    return result;
 }
 
 void PSet::symmetric_difference_update(const PSet& other) {
-    auto s1 = difference(other);
-    auto s2 = other.difference(*this);
-    container_ = s1.union_(s2).container_;
+    this->symmetricExceptWith(other);
 }
 
 void PSet::update(const PSet& other) {
-    for (auto it = other.container_.begin(); it != other.container_.end(); ++it) {
-        add(*it);
-    }
+    this->unionWith(other);
 }
 
 PSet PSet::operator-(const PSet& other) const {
@@ -162,11 +121,11 @@ PSet PSet::operator-(const PAnyWrapper& other) const {
 }
 
 bool PSet::operator==(const PSet& other) const {
-    if (container_.size() != other.container_.size()) {
+    if (count() != other.count()) {
         return false;
     }
-    for (auto it = container_.begin(); it != container_.end(); ++it) {
-        if (!other.contain(*it)) {
+    for (auto it = cbegin(); it != cend(); ++it) {
+        if (!other.contains(*it)) {
             return false;
         }
     }

@@ -53,9 +53,6 @@ size_t PString::length() const
     return _data.size();
 }
 
-void PString::reverse(){
-    _data = std::u32string(_data.rbegin(), _data.rend());
-}
 
 PString PString::lstrip(const PString &__strp_str) const
 {
@@ -624,7 +621,7 @@ PString PString::translate(const PDict &table) const
     for (auto c : _data)
     {
         auto ch = PString(c);
-        if(table.contain(ch)){
+        if(table.contains(ch)){
             result += table[ch].unwrap<PString>();
         }else{
             result += c;
@@ -880,24 +877,6 @@ PString &PString::operator+=(const std::string &other)
     return *this;
 }
 
-PIterator<PString> PString::begin()
-{
-    return _data.begin();
-}
-PIterator<PString> PString::end()
-{
-    return _data.end();
-}
-
-const PIterator<PString> PString::cbegin() const
-{
-    return _data.cbegin();
-}
-
-const PIterator<PString> PString::cend() const
-{
-    return _data.cend();
-}
 
 size_t PString::hash() const
 {

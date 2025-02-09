@@ -1,6 +1,30 @@
 #include "sapy/plist.h"
+#include "sapy/panywrapper.h"
 namespace sapy{
 
+bool PList::operator<(const PList& other) const {
+    size_t thisSize = this->count();
+    if (thisSize < other.count())
+        return true;
+
+    for (size_t i = 0; i < thisSize; ++i)
+        if((*this)[i] < other[i])
+            return true;
+
+    return false;
+}
+
+bool PList::operator==(const PList &other) const{
+    if (this->count() != other.count())
+        return false;
+
+    for (size_t i = 0; i < other.count(); i++){
+        if ((*this)[i] != other[i])
+            return false;
+    }
+
+    return true;
+}
 
 void PList::_print(std::ostream& os) const{
     os << toString();
@@ -8,59 +32,60 @@ void PList::_print(std::ostream& os) const{
 
 PString PList::toString() const {
     PString result = "[";
-    for (size_t i = 0; i < data_.size(); i++) {
-        if(data_[i].isString()){
+
+    for(size_t i = 0; i < count(); ++i){
+        if ((*this)[i].isString()){
             result += "\"";
-            result += data_[i].toString();
+            result += (*this)[i].toString();
             result += "\"";
+            continue;
         }else{
-        result += data_[i].toString();
+            result += (*this)[i].toString();
         }
-        if (i + 1 < data_.size()) {
+
+        if (i + 1 < count()){
             result += ", ";
         }
     }
+
     result += "]";
     return result;
 }
 
-bool PList::operator==(const PList& other) const {
-    if (data_.size() != other.data_.size()) {
-        return false;
-    }
-    for (size_t i = 0; i < data_.size(); i++) {
-        if (data_[i] != other.data_[i]) {
-            return false;
-        }
-    }
-    return true;
-}
-
 void PList::sort(
-    std::function<bool(const PAnyWrapper&, const PAnyWrapper&)> cmp,
-    std::function<PAnyWrapper(const PAnyWrapper&)> key,
-    bool reverse
-){
-    sortT<PAnyWrapper>(cmp, key, reverse);
-}
+    std::function<PAnyWrapper(const PAnyWrapper &)> key,
+    bool reverse)
+{
+    if (key && !reverse)
+    {
+        collection::PSorter<PAnyWrapper> sorter([key](const PAnyWrapper &a, const PAnyWrapper &b) -> bool
+                                                { return key(a) < key(b); });
 
-
-bool PList::operator<(const PList& other) const {
-    if(data_.size() < other.data_.size()){
-        return true;
+        sorter.sort(begin(), end());
+        return;
     }
-    for(size_t i = 0; i < data_.size(); i++){
-        if(data_[i] < other.data_[i]){
-            return true;
-        }
+
+    if (key && reverse)
+    {
+        collection::PSorter<PAnyWrapper> sorter([key](const PAnyWrapper &a, const PAnyWrapper &b) -> bool
+                                                { return key(a) > key(b); });
+
+        sorter.sort(begin(), end());
+        return;
     }
-    return false;
+
+    if (!key && !reverse)
+    {
+        collection::PSorter<PAnyWrapper> sorter;
+        sorter.sort(begin(), end());
+    }
+
+    if (!key && reverse)
+    {
+        collection::PSorter<PAnyWrapper> sorter([](const PAnyWrapper &a, const PAnyWrapper &b) -> bool
+                                                { return a > b; });
+        sorter.sort(begin(), end());
+    }
 }
 
-}
-
-
-
-void sapy::PList::reverse(){
-    std::reverse(data_.begin(), data_.end());
 }

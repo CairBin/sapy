@@ -2,15 +2,9 @@
 
 namespace sapy{
 
-PDict::PDict(std::initializer_list<std::pair<PAnyWrapper, PAnyWrapper>> init) {
-    for (const auto& pair : init) {
-        container_[pair.first] = pair.second;
-    }
-}
-
 PString PDict::toString() const {
     PString result = "{";
-    for(auto it = container_.begin(); it != container_.end(); it++){
+    for(auto it = cbegin(); it != cend(); it++){
         if(it->first.isString()){
             result += "\"" + it->first.toString() + "\"";
         }else{
@@ -22,7 +16,7 @@ PString PDict::toString() const {
         }else{
             result += it->second.toString();
         }
-        if(std::next(it) != container_.end()){
+        if(std::next(it) != cend()){
             result += ", ";
         }
     }
@@ -30,39 +24,22 @@ PString PDict::toString() const {
     return result;
 }
 
-bool PDict::contain(const PAnyWrapper& key) const {
-    return container_.find(key) != container_.end();
-}
-
 void PDict::_print(std::ostream &os) const {
     os << toString();
 }
 
-size_t PDict::HashFunc::operator()(const PAnyWrapper &obj) const {
-    return obj.hash();
-}
-
-PAnyWrapper& PDict::operator[](const PAnyWrapper& key) {
-    return container_[key];
-}
-
-const PAnyWrapper& PDict::operator[](const PAnyWrapper& key) const {
-    auto it = container_.find(key);
-    if (it == container_.end()) {
-        throw std::out_of_range("Key not found in PDict");
-    }
-    return it->second;
-}
 
 bool PDict::operator==(const PDict& other) const {
-    if (container_.size() != other.container_.size()) {
+    if (count() != other.count()) {
         return false;
     }
-    for (auto it = container_.begin(); it != container_.end(); ++it) {
-        auto other_it = other.container_.find(it->first);
-        if (other_it == other.container_.end() || it->second != other_it->second) {
+    for (auto it = cbegin(); it != cend(); ++it) {
+        // auto other_it = other.find(it->first);
+        // if (other_it == other.cend() || it->second != other_it->second) {
+        //     return false;
+        // }
+        if(other[it->first] != it->second)
             return false;
-        }
     }
     return true;
 }
