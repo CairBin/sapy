@@ -10,20 +10,23 @@
 #include <iostream>
 #include <format>
 #include "sapy/pbytes.h"
-#include "sapy/piterator.h"
 #include "sapy/plist.h"
-#include "sapy/panywrapper.h"
 #include "sapy/pdict.h"
-#include "sapy/pcollection_interface.h"
+#include "sapy/collection/piterator_interface.h"
 
 namespace sapy{
 
 class PList;
-class PAnyWrapper;
 class PDict;
 class PBytes;
+class PAnyWrapper;
 
-class PString : public PObject, public PReversableInterface{
+using PStringIterator = collection::FromStlIteratorBaseTemplate<typename std::u32string::iterator, typename collection::PIteratorInterface<char32_t>, char32_t>;
+using PStringConstIterator = collection::FromStlConstIteratorBaseTemplate<typename std::u32string::const_iterator, typename collection::PConstIteratorInterface<char32_t>, char32_t>;
+using PStringReverseIterator = collection::FromStlIteratorBaseTemplate<typename std::u32string::reverse_iterator, typename collection::PReverseIteratorInterface<char32_t>, char32_t>;
+using PStringConstReverseIterator = collection::FromStlConstIteratorBaseTemplate<typename std::u32string::const_reverse_iterator, typename collection::PConstReverseIteratorInterface<char32_t>, char32_t>;
+
+class PString : public PObject, public collection::PIterableInterface<char32_t, char32_t>, public collection::PReverseIterableInterface<char32_t, char32_t>{
 public:
     PString();                           
     PString(const PString&) = default;   
@@ -40,8 +43,7 @@ public:
     
     PString substr(size_t start, size_t end=std::u32string::npos) const;
     
-    
-    void reverse() override;
+
     PString captilize() const;
     PString casefold() const;
     PString center(size_t width, char fillchar=' ') const;
@@ -156,14 +158,41 @@ public:
     using const_iterator = std::u32string::const_iterator;
     using value_type = PString;  
     using const_value_type = const PString;
-
-    PIterator<PString> begin();
-    PIterator<PString> end();
-    const PIterator<PString> cbegin() const;
-    const PIterator<PString> cend() const;
     
     size_t hash() const override;
 
+public:
+    collection::PIteratorInterface<char32_t> begin() override{
+        return (collection::PIteratorInterface<char32_t>)PStringIterator(_data.begin());
+    }
+
+    collection::PConstIteratorInterface<char32_t> cbegin() const override{
+        return (collection::PConstIteratorInterface<char32_t>)PStringConstIterator(_data.cbegin());
+    }
+
+    collection::PIteratorInterface<char32_t> end() override{
+        return (collection::PIteratorInterface<char32_t>)PStringIterator(_data.end());
+    }
+
+    collection::PConstIteratorInterface<char32_t> cend() const override{
+        return (collection::PConstIteratorInterface<char32_t>)PStringConstIterator(_data.cend());
+    }
+
+    collection::PReverseIteratorInterface<char32_t> rbegin() override{
+        return (collection::PReverseIteratorInterface<char32_t>)PStringReverseIterator(_data.rbegin());
+    }
+
+    collection::PReverseIteratorInterface<char32_t> rend() override{
+        return (collection::PReverseIteratorInterface<char32_t>)PStringReverseIterator(_data.rend());
+    }
+
+    collection::PConstReverseIteratorInterface<char32_t> crbegin() const override{
+        return (collection::PConstReverseIteratorInterface<char32_t>)PStringConstReverseIterator(_data.crbegin());
+    }
+
+    collection::PConstReverseIteratorInterface<char32_t> crend() const override{
+        return (collection::PConstReverseIteratorInterface<char32_t>)PStringConstReverseIterator(_data.crend());
+    }
 private:
     virtual void _print(std::ostream& os) const override;
     std::u32string _data;
@@ -172,6 +201,11 @@ private:
 
 PString operator+(const char* lhs, const PString& rhs);
 PString operator+(const std::string& lhs, const PString& rhs);
+
+// inline std::ostream& operator<<(std::ostream& os, const char32_t& c) {
+//     os << PString(c);
+//     return os;
+// }
 
 
 }

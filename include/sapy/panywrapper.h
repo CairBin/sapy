@@ -34,7 +34,7 @@ public:
             throw std::bad_cast();
         }
     }
-    virtual size_t hash() const override;
+    size_t hash() const override;
 
     template <typename U>
     operator U() const{

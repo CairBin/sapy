@@ -1,26 +1,16 @@
 #pragma once
-
 #include "sapy/pobject.h"
+#include "sapy/base/pbytes.h"
 #include "sapy/pstring.h"
-#include <vector>
-#include <cstdint>
-#include <iostream>
 
 namespace sapy {
 
-class PBytes : public PObject {
+class PBytes : public PObject, public base::PBytes{
 public:
-    PBytes() = default;
-    PBytes(const std::vector<uint8_t>& data);
-    PBytes(const PBytes& other);
-
-    virtual PString toString() const override;
-    size_t length() const; 
-    size_t size() const;
-
+    using base::PBytes::PBytes;
+    PString toString() const override;
 private:
-    virtual void _print(std::ostream& os) const override;
-    std::vector<uint8_t> _data;
+    virtual void _print(std::ostream &os) const override;
 };
 
 }  // namespace sapy
