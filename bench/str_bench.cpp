@@ -38,10 +38,10 @@ void str_bench(){
     for(size_t i = 0; i < BENCH_SIZE; i++){
         v.push_back(rand()%26 + 'a');
     }
-
+    std::cout << "-----------------------------------------" << std::endl;
     bench(std_str_add_b, BENCH_SIZE, "STL String += string");
     bench(pstring_add_b, BENCH_SIZE, "Sapy PString += string");
-
+    std::cout << "-----------------------------------------" << std::endl;
     bench(std_str_add_c_b, BENCH_SIZE, "STL String += char");
     bench(pstring_add_c_b, BENCH_SIZE, "Sapy PString += char");
 }

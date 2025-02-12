@@ -11,15 +11,20 @@
 #include <format>
 #include "sapy/pbytes.h"
 #include "sapy/piterator.h"
-#include "sapy/plist.h"
 #include "sapy/panywrapper.h"
-#include "sapy/pdict.h"
+
 namespace sapy{
 
-class PList;
+
 class PAnyWrapper;
-class PDict;
 class PBytes;
+template <typename T>
+class PListT;
+using PList = PListT<PAnyWrapper>;
+
+template <typename KeyType,typename ValueType>
+class PDictT;
+using PDict = PDictT<PAnyWrapper, PAnyWrapper>;
 
 class PString : public PObject {
 public:

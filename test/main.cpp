@@ -365,8 +365,8 @@ int main(){
     }
     cout << "s1.add(0-9) = " << s1 << endl;
 
-    cout << "s1.contain(5) = " << s1.contain(5) << endl;
-    cout << "s1.contain(10) = " << s1.contain(10) << endl;
+    cout << "s1.contains(5) = " << s1.contains(5) << endl;
+    cout << "s1.contains(10) = " << s1.contains(10) << endl;
 
     s1.remove(5);
     cout << "s1.remove(5) -> s1:  " << s1 << endl;

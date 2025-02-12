@@ -1,7 +1,7 @@
 #pragma once
 #include "sapy/pobject.h"
-#include "sapy/pcollection_interface.h"
 #include "sapy/pstring.h"
+#include "sapy/pconnection.h"
 
 namespace sapy{
 
@@ -11,11 +11,10 @@ bool is(const PObject &a, const PObject &b);
 // hash function
 size_t hash(const PObject& obj);
 
-template<typename T>
-size_t len(const PCollectionInterface<T>& collection){
-    return collection.size();
-}
+size_t len(const PString &str);
 
-size_t len(const PString& str);
+
+size_t len(const PConnection& container);
+
 
 }

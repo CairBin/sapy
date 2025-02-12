@@ -1,6 +1,8 @@
 #include "sapy/panywrapper.h"
 #include "sapy/pstring.h"
 #include "sapy/pset.h"
+#include "sapy/plistT.hpp"
+#include "sapy/pdictT.hpp"
 #include <string>
 namespace sapy {
 

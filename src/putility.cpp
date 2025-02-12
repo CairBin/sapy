@@ -13,5 +13,8 @@ size_t len(const PString &str){
     return str.length();
 }
 
+size_t len(const PConnection& container){
+    return container.size();
+}
 
 }

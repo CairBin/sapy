@@ -1,7 +1,6 @@
 #pragma once
 
 #include "sapy/panywrapper.h"
-#include "sapy/pcollection_interface.h"
 #include <algorithm>
 #include <iterator>
 
