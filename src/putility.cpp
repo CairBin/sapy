@@ -2,7 +2,7 @@
 
 namespace sapy{
 bool is(const PObject &a, const PObject &b){
-    return a.hash() == b.hash();
+    return &a == &b;
 }
 
 size_t hash(const PObject &obj){
