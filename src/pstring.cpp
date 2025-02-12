@@ -886,12 +886,12 @@ PIterator<PString> PString::end()
     return _data.end();
 }
 
-const PIterator<PString> PString::cbegin() const
+const PConstIterator<PString> PString::cbegin() const
 {
     return _data.cbegin();
 }
 
-const PIterator<PString> PString::cend() const
+const PConstIterator<PString> PString::cend() const
 {
     return _data.cend();
 }

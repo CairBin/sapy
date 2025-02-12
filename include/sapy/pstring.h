@@ -162,8 +162,8 @@ public:
 
     PIterator<PString> begin();
     PIterator<PString> end();
-    const PIterator<PString> cbegin() const;
-    const PIterator<PString> cend() const;
+    const PConstIterator<PString> cbegin() const;
+    const PConstIterator<PString> cend() const;
     
     size_t hash() const override;
 

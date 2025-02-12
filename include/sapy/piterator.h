@@ -17,13 +17,13 @@ public:
     using ConstValueType = typename Container::const_value_type;
 
     PIterator(IteratorType iter) : _iter(iter) {}
-    PIterator(ConstIteratorType iter) : _iter(iter) {}
+    //PIterator(ConstIteratorType iter) : _iter(iter) {}
 
-    ValueType& operator*() {
+    ValueType operator*() {
         return *_iter;
     }
 
-    const ValueType& operator*() const {
+    const ValueType operator*() const {
         return *_iter;
     }
 
@@ -61,6 +61,53 @@ private:
     //     os << toString();
     // }
     IteratorType _iter; 
+};
+
+
+template <typename Container>
+class PConstIterator {
+public:
+    using ConstIteratorType = typename Container::const_iterator;
+    using ValueType = typename Container::value_type;
+    using ConstValueType = typename Container::const_value_type;
+
+    PConstIterator(ConstIteratorType iter) : _iter(iter) {}
+
+    const ValueType operator*() const {
+        return *_iter;
+    }
+
+
+    PConstIterator& operator++() {
+        ++_iter;
+        return *this;
+    }
+
+
+    PConstIterator operator++(int) {
+        PConstIterator temp = *this;
+        ++(*this);
+        return temp;
+    }
+
+    PConstIterator operator+(size_t n) {
+        return PConstIterator(_iter + n);
+    }
+
+    bool operator!=(const PConstIterator& other) const {
+        return _iter != other._iter;
+    }
+
+    bool operator==(const PConstIterator& other) const {
+        return _iter == other._iter;
+    }
+
+    const ConstValueType* operator->() const {
+        return &(*_iter);
+    }
+
+private:
+    ConstIteratorType _iter; 
 };
 
 }

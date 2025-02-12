@@ -224,10 +224,10 @@ public:
     inline PIterator<PSetT> end(){
         return container_.end();
     }
-    inline const PIterator<PSetT> cbegin() const{
+    inline const PConstIterator<PSetT> cbegin() const{
         return container_.begin();
     }
-    inline const PIterator<PSetT> cend() const{
+    inline const PConstIterator<PSetT> cend() const{
         return container_.end();
     }
 
