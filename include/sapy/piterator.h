@@ -19,13 +19,11 @@ public:
     PIterator(IteratorType iter) : _iter(iter) {}
     PIterator(ConstIteratorType iter) : _iter(iter) {}
 
-    // Do not use reference here
-    ValueType operator*() {
+    ValueType& operator*() {
         return *_iter;
     }
 
-    // Do not use reference here
-    const ValueType operator*() const {
+    const ValueType& operator*() const {
         return *_iter;
     }
 
@@ -62,8 +60,7 @@ private:
     // virtual void _print(std::ostream& os) const override {
     //     os << toString();
     // }
-
-    ConstIteratorType _iter;  
+    IteratorType _iter; 
 };
 
 }
