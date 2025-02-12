@@ -425,5 +425,23 @@ int main(){
     cout << "s4.add(2) -> s4 = " << s4 << endl;
     s4.add(2);
     cout << "s4.add(2) -> s4 = " << s4 << endl;
+    std::cout << "--------" <<std::endl;
+    for(auto i: range(10)){
+        cout << i << endl;
+    }
+    std::cout << "--------" <<std::endl;
+    for(auto i: range(1,11)){
+        cout << i << endl;
+    }
+    std::cout << "--------" <<std::endl;
+
+    for(auto i: range(0,30,5)){
+        cout << i << endl;
+    }
+    std::cout << "--------" <<std::endl;
+    for(auto i: range(0,-10,-1)){
+        cout << i << endl;
+    }
+    std::cout << "--------" <<std::endl;
     return 0;
 }
