@@ -4,7 +4,7 @@ from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
 
 class helloRecipe(ConanFile):
     name = "sapy"
-    version = "0.0.2"
+    version = "0.0.1"
     package_type = "library"
 
     # Optional metadata
