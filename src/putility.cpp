@@ -18,19 +18,17 @@ size_t len(const PConnection& container){
 }
 
 
-PListT<int> range(int start){
-    return range(0, start);
+PRange range(int end){
+    return range(0, end);
 }
 
-PListT<int> range(int start, int end, int step){
-    PListT<int> result;
+
+
+PRange range(int start, int end, int step){
     if(step == 0){
         std::runtime_error("range() arg 3 must not be zero");
     }
-    for(int i = start; step > 0 ? i < end : i > end; i+=step){
-        result.append(i);
-    }
-    return result;
+    return PRange (start,end, step);;
 }
 
 }

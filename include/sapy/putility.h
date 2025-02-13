@@ -17,8 +17,71 @@ size_t len(const PString &str);
 
 size_t len(const PConnection& container);
 
-PListT<int> range(int start);
-PListT<int> range(int start, int end, int step=1);
+
+class PRange: public PObject{
+public:
+    PRange(int start, int end, int step = 1)
+        : start_(start), end_(end), step_(step) {
+        if (step == 0) {
+            throw std::invalid_argument("Step cannot be zero");
+        }
+    }
+
+    class Iterator {
+    public:
+        Iterator(int current, int step) : current_(current), step_(step) {}
+
+        int operator*() const {
+            return current_;
+        }
+
+        Iterator& operator++() {
+            current_ += step_;
+            return *this;
+        }
+
+        bool operator!=(const Iterator& other) const {
+            if (step_ > 0) {
+                return current_ < other.current_;
+            }
+            return current_ > other.current_;
+        }
+
+    private:
+        int current_;
+        int step_;
+    };
+
+    Iterator begin() const {
+        return Iterator(start_, step_);
+    }
+
+    Iterator end() const {
+        if (step_ > 0) {
+            return Iterator(end_, step_);
+        } else {
+            return Iterator(end_, step_);
+        }
+    }
+    virtual PString toString() const override{
+        if(step_ == 1){
+            return PString("range(") + PString(std::to_string(start_)) + ", " + PString(std::to_string(end_)) + ")";
+        }
+        return PString("range(") + PString(std::to_string(start_)) + ", " + 
+            PString(std::to_string(end_)) + ", " + PString(std::to_string(step_)) + ")";
+    }
+private:
+    int start_;
+    int end_;
+    int step_;
+    virtual void _print(std::ostream& os) const override{
+        os << toString();
+    }
+};
+
+
+PRange range(int end);
+PRange range(int start, int end, int step=1);
 
 
 }
