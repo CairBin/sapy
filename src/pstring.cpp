@@ -107,13 +107,13 @@ PString PString::upper() const
     return PString(upperStr);
 }
 
-PList PString::split(const PString &sep, size_t maxsplit) const
+PListT<PString> PString::split(const PString &sep, size_t maxsplit) const
 {
 
     size_t pos = 0;
     size_t prevPos = 0;
     size_t cnt = 0;
-    PList result;
+    PListT<PString> result;
     if (sep.length() == 0)
     {
         result.append(*this);
@@ -423,9 +423,9 @@ PDict PString::maketrans(const PString &x, const PString &y, const PString &z)
 }
 
 
-PList PString::partition(const PString &sep) const
+PListT<PString> PString::partition(const PString &sep) const
 {
-    PList result;
+    PListT<PString> result;
     size_t pos = find(sep);
     if (pos == -1)
     {
@@ -496,9 +496,9 @@ int PString::rindex(const PString &sub, size_t start, size_t end) const
     return pos;
 }
 
-PList PString::rpartition(const PString &sep) const
+PListT<PString> PString::rpartition(const PString &sep) const
 {
-    PList result;
+    PListT<PString> result;
     size_t pos = rfind(sep);
     if (pos == -1)
     {
@@ -509,12 +509,12 @@ PList PString::rpartition(const PString &sep) const
     return result;
 }
 
-PList PString::rsplit(const PString &sep, size_t maxsplit) const
+PListT<PString> PString::rsplit(const PString &sep, size_t maxsplit) const
 {
     size_t pos = 0;
     size_t prevPos = _data.size();
     size_t cnt = 0;
-    PList result;
+    PListT<PString> result;
     std::vector<PString> result_rev;
     if (sep.length() == 0)
     {
@@ -537,9 +537,9 @@ PList PString::rsplit(const PString &sep, size_t maxsplit) const
     return result;
 }
 
-PList PString::splitlines(bool keepends) const
+PListT<PString> PString::splitlines(bool keepends) const
 {
-    PList result;
+    PListT<PString> result;
     size_t pos = 0;
     size_t prevPos = 0;
     // support \r \n \r\n \v \f \x1c \x1d \x1e \x85 \u2028 \u2029

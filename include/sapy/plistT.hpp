@@ -107,6 +107,13 @@ public:
         return !((*this)<other);
     }
 
+    operator PListT<PAnyWrapper>() const{
+        PListT<PAnyWrapper> result;
+        for(auto &elem: data_){
+            result.append(elem);
+        }
+        return result;
+    }
 
 public:
 
