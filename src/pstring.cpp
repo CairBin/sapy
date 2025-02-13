@@ -57,12 +57,18 @@ size_t PString::length() const
 PString PString::lstrip(const PString &__strp_str) const
 {
     size_t pos = _data.find_first_not_of(__strp_str._data);
+    if(pos == std::u32string::npos){
+        return PString(_data);
+    }
     return PString(_data.substr(pos));
 }
 
 PString PString::rstrip(const PString &__strp_str) const
 {
     size_t pos = _data.find_last_not_of(__strp_str._data);
+    if(pos == std::u32string::npos){
+        return PString(_data);
+    }
     return PString(_data.substr(0, pos + 1));
 }
 PString PString::strip(const PString &__strp_str) const
@@ -114,11 +120,29 @@ PListT<PString> PString::split(const PString &sep, size_t maxsplit) const
     size_t prevPos = 0;
     size_t cnt = 0;
     PListT<PString> result;
-    if (sep.length() == 0)
-    {
-        result.append(*this);
+    if (sep.length() == 0) {
+        while (cnt++ < maxsplit && pos < _data.size()) {
+            while (pos < _data.size() && (_data[pos] == U' ' || _data[pos] == U'\t' || 
+                                        _data[pos] == U'\n' || _data[pos] == U'\r')) {
+                pos++;
+            }
+            prevPos = pos;
+
+            while (pos < _data.size() && !(_data[pos] == U' ' || _data[pos] == U'\t' || 
+                                        _data[pos] == U'\n' || _data[pos] == U'\r')) {
+                pos++;
+            }
+
+            if (prevPos < pos) {
+                result.append(PString(_data.substr(prevPos, pos - prevPos)));
+            }
+
+        }
         return result;
+        
     }
+
+
     while (cnt++ < maxsplit && (pos = _data.find(sep._data, prevPos)) != std::u32string::npos)
     {
         result.append(PString(_data.substr(prevPos, pos - prevPos)));

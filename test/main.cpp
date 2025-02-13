@@ -43,6 +43,13 @@ int main(){
     for(auto c : str_chinese){
         cout << PString(c) << endl;
     }
+    PString str_split_debug = "async_inst  \\";
+    PList list_split = str_split_debug.split();
+    cout << str_split_debug.toString() + ".split() = " << list_split << endl;
+    PString str_split_debug2 = "sd d f\n\r\t   f";
+    PList list_split2 = str_split_debug2.split();
+    cout << str_split_debug2.toString() + ".split() = " << list_split2 << endl;
+
 
     PString str3 = "abc:1222::3333:::";
     PList list = str3.split(":");
