@@ -318,6 +318,12 @@ int main(){
     });
     cout << "list8.sort(cmp, key) = " << list8 << endl;
 
+    cout << "list8.pop() = " << list8.pop() << endl;
+    cout << "list8 = " << list8 << endl;
+    cout << "list8.pop(0) = " << list8.pop(0) << endl;
+    cout << "list8 = " << list8 << endl;
+    
+
     PDict dict;
     dict[PString("key1")] = PString("value1");
     dict[PString("key2")] = PString("value2");

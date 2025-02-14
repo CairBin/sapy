@@ -179,6 +179,18 @@ public:
         data_.emplace_back(item);
     }
 
+    T pop(int index = -1){
+        if(index < 0){
+            index = data_.size() + index;
+        }
+        if(index < 0 || index >= data_.size()){
+            throw std::runtime_error("Index out of range.");
+        }
+        T result = data_[index];
+        data_.erase(data_.begin() + index);
+        return result;
+    }
+
     size_t index(const T& elem, size_t start, size_t end) const {
         auto it = find(data_.begin() + start, data_.begin() + end, elem);
         if (it == data_.end())
