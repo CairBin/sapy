@@ -901,6 +901,10 @@ PString &PString::operator+=(const std::string &other)
     return *this;
 }
 
+PString::operator bool() const{
+    return _data.size() > 0;
+}
+
 PIterator<PString> PString::begin()
 {
     return _data.begin();

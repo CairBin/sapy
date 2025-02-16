@@ -212,7 +212,9 @@ public:
     inline bool operator>=(const PSetT& other) const {
         return !(*this < other);
     }
-
+    inline operator bool() const {
+        return !container_.empty();
+    }
 
     using iterator = std::unordered_set<PAnyWrapper, HashFunc>::iterator;
     using const_iterator = std::unordered_set<PAnyWrapper, HashFunc>::const_iterator;

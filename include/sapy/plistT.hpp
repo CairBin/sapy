@@ -115,6 +115,10 @@ public:
         return result;
     }
 
+    operator bool() const{
+        return data_.size() > 0;
+    }
+
 public:
 
     PListT() = default;

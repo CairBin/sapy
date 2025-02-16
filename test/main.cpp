@@ -364,7 +364,7 @@ int main(){
     //const_iter(dict2);
 
     std::cout <<dict2 <<std::endl;
-    std::cout << "dict2[\"key3\"] = " << dict2["key3"] << std::endl; 
+    std::cout << "dict2[\"key3\"] = " << dict2[("key3")] << std::endl; 
 
     for(auto iter = dict.begin(); iter != dict.end(); iter++){
         cout << iter->first << ": " << iter->second <<std::endl;
@@ -476,6 +476,43 @@ int main(){
 
     std::cout << "--------" <<std::endl;
 
+
+    // implicit conversion to bool 
+    PString str_bool = "abc";
+    if(str_bool){
+        cout << "str_bool:" + str_bool.toString() + " is true" << endl;
+    } 
+    str_bool = "";
+    if(!str_bool){
+        cout << "str_bool:" + str_bool.toString() + " is false" << endl;
+    }
     
+    PList list_bool = {1,2,3};
+    if(list_bool){
+        cout << "list_bool:" + list_bool.toString() + " is true" << endl;
+    }
+    list_bool.clear();
+    if(!list_bool){
+        cout << "list_bool:" + list_bool.toString() + " is false" << endl;
+    }
+
+    PSet set_bool = {1,2,3};
+    if(set_bool){
+        cout << "set_bool:" + set_bool.toString() + " is true" << endl;
+    }
+    set_bool.clear();
+    if(!set_bool){
+        cout << "set_bool:" + set_bool.toString() + " is false" << endl;
+    }
+
+    // PDict dict_bool = {{"key1", "value1"}};
+    // if(dict_bool){
+    //     cout << "dict_bool:" + dict_bool.toString() + " is true" << endl;
+    // }
+    // dict_bool.clear();
+    // if(!dict_bool){
+    //     cout << "dict_bool:" + dict_bool.toString() + " is false" << endl;
+    // }
+
     return 0;
 }

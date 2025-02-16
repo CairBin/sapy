@@ -114,6 +114,10 @@ public:
         throw std::runtime_error("Unsupported type for PDictT >= operator");
         return false;
     }
+
+    explicit inline operator bool() const {
+        return !container_.empty();
+    }
     
     using iterator = std::unordered_map<KeyType, ValueType, HashFunc>::iterator;
     using const_iterator = std::unordered_map<KeyType, ValueType, HashFunc>::const_iterator;  
