@@ -14,6 +14,15 @@
 using namespace sapy;
 using namespace std;
 
+template <typename T>
+void const_iter(const T &collect){
+    cout << "const_iter:" << endl;
+    for(auto const &item: collect){
+        cout << item << endl;
+    }
+}
+
+
 int main(){
     PString str("Hello, World!");
     cout << str << endl;
@@ -49,7 +58,7 @@ int main(){
     PString str_split_debug2 = "sd d f\n\r\t   f";
     PList list_split2 = str_split_debug2.split();
     cout << str_split_debug2.toString() + ".split() = " << list_split2 << endl;
-
+    
 
     PString str3 = "abc:1222::3333:::";
     PList list = str3.split(":");
@@ -210,6 +219,8 @@ int main(){
     
     cout << std::format("str_equal: {}",str_equal) << std::endl;
 
+    const_iter(str_equal);
+
     std::vector<PString> vec = {"a", "b", "c", "d", "e","aaa","abc","ce"};
     std::sort(vec.begin(), vec.end());
     for(auto item: vec){
@@ -318,6 +329,8 @@ int main(){
     });
     cout << "list8.sort(cmp, key) = " << list8 << endl;
 
+    const_iter(list8);
+
     cout << "list8.pop() = " << list8.pop() << endl;
     cout << "list8 = " << list8 << endl;
     cout << "list8.pop(0) = " << list8.pop(0) << endl;
@@ -348,6 +361,7 @@ int main(){
         {"key2", PString("value2")},
         {"key3", 128}
     };
+    //const_iter(dict2);
 
     std::cout <<dict2 <<std::endl;
     std::cout << "dict2[\"key3\"] = " << dict2["key3"] << std::endl; 
@@ -421,6 +435,7 @@ int main(){
     s4.add(PSet({"1", "2", "4"}));
 
     cout << "s4 = " << s4 << endl;
+    const_iter(s4);
 
     for(auto it = s4.begin(); it != s4.end(); it++){
         for(auto jt = it; jt != s4.end(); jt++){
@@ -460,5 +475,7 @@ int main(){
     }
 
     std::cout << "--------" <<std::endl;
+
+    
     return 0;
 }

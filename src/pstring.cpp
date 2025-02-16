@@ -919,6 +919,12 @@ const PConstIterator<PString> PString::cend() const
 {
     return _data.cend();
 }
+const PConstIterator<PString> PString::begin() const{
+    return _data.cbegin();
+}
+const PConstIterator<PString> PString::end() const{
+    return _data.cend();
+}
 
 size_t PString::hash() const
 {

@@ -126,12 +126,20 @@ public:
     inline PIterator<PDictT> end(){
         return (container_.end());
     }
-    inline const PIterator<PDictT> begin() const{
+    inline const PConstIterator<PDictT> begin() const{
         return (container_.cbegin());
     }
-    inline const PIterator<PDictT> end() const{
+    inline const PConstIterator<PDictT> end() const{
         return (container_.cend());
     }
+
+    inline const PConstIterator<PDictT> cbegin() const{
+        return (container_.cbegin());
+    }
+    inline const PConstIterator<PDictT> cend() const{
+        return (container_.cend());
+    }
+
 
     inline iterator find(const KeyType& key){
         return iterator(container_.find(key));

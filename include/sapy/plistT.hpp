@@ -153,6 +153,14 @@ public:
         return (data_.begin());
     }
 
+    inline const PConstIterator<PListT> begin() const{
+        return (data_.cbegin());
+    }
+
+    inline const PConstIterator<PListT> end() const{
+        return (data_.cend());
+    }
+
     inline PIterator<PListT> end(){
         return (data_.end());
     }

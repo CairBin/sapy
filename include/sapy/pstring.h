@@ -162,6 +162,8 @@ public:
 
     PIterator<PString> begin();
     PIterator<PString> end();
+    const PConstIterator<PString> begin() const;
+    const PConstIterator<PString> end() const;
     const PConstIterator<PString> cbegin() const;
     const PConstIterator<PString> cend() const;
     

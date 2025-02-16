@@ -231,6 +231,13 @@ public:
         return container_.end();
     }
 
+    inline const PConstIterator<PSetT> begin() const{
+        return container_.cbegin();
+    }
+    inline const PConstIterator<PSetT> end() const{
+        return container_.cend();
+    }
+
 private:
     inline virtual void _print(std::ostream& os) const override{
         os << toString();
