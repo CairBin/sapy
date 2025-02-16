@@ -505,14 +505,14 @@ int main(){
         cout << "set_bool:" + set_bool.toString() + " is false" << endl;
     }
 
-    // PDict dict_bool = {{"key1", "value1"}};
-    // if(dict_bool){
-    //     cout << "dict_bool:" + dict_bool.toString() + " is true" << endl;
-    // }
-    // dict_bool.clear();
-    // if(!dict_bool){
-    //     cout << "dict_bool:" + dict_bool.toString() + " is false" << endl;
-    // }
+    PDict dict_bool = {{"key1", "value1"}};
+    if(dict_bool){
+        cout << "dict_bool:" + dict_bool.toString() + " is true" << endl;
+    }
+    dict_bool.clear();
+    if(!dict_bool){
+        cout << "dict_bool:" + dict_bool.toString() + " is false" << endl;
+    }
 
     return 0;
 }

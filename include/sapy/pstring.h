@@ -155,7 +155,7 @@ public:
     PString& operator+=(const PAnyWrapper& other);
     PString& operator+=(const std::string& other);
     
-    operator bool() const;
+    explicit operator bool() const;
 
     using iterator = std::u32string::iterator;
     using const_iterator = std::u32string::const_iterator;

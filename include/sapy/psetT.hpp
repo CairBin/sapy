@@ -212,7 +212,7 @@ public:
     inline bool operator>=(const PSetT& other) const {
         return !(*this < other);
     }
-    inline operator bool() const {
+    explicit inline operator bool() const {
         return !container_.empty();
     }
 
