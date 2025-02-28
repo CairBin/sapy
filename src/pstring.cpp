@@ -54,6 +54,40 @@ size_t PString::length() const
     return _data.size();
 }
 
+size_t PString::size() const{
+    return _data.size();
+};
+bool PString::empty() const{
+    return _data.empty();
+};
+
+PString PString::slice(int start, int stop, int step) const {
+    const int size = _data.size();
+
+    if (stop > size) stop = size;
+    start = start < 0 ? size + start : start;
+    stop = stop < 0 ? size + stop : stop;
+
+    if (step == 0)
+        throw std::invalid_argument("PString: slice step cannot be zero");
+
+    if (size == 0 || (step > 0 ? start > stop : start < stop)) return PString(); 
+    if (step == 1) return substr(start, stop - start);
+
+
+    if (start < 0 || start > size || stop < 0 || stop > size)
+    {
+        throw std::out_of_range("PString: index out of range");
+    }
+
+    std::string result;
+    result.reserve((stop - start) / step + 1);
+    for(int i = start; (step > 0 ? i < stop : i > stop); i += step){
+        result.push_back(_data[i]);
+    }
+    return PString(result);
+}
+
 PString PString::lstrip(const PString &__strp_str) const
 {
     size_t pos = _data.find_first_not_of(__strp_str._data);
@@ -813,6 +847,10 @@ const PString PString::operator[](size_t index) const
 
     auto singleChar32 = _data[index];
     return PString(singleChar32);
+}
+
+PString PString::operator()(int start, int stop, int step) const {
+    return slice(start, stop, step);
 }
 
 PString PString::operator+(const PString &other) const

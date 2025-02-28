@@ -40,9 +40,13 @@ public:
     std::string toStdString() const;
     int toInt() const;
     size_t length() const;
+    size_t size() const;
+    bool empty() const;
     
+    // C++ Style substr()
     PString substr(size_t start, size_t end=std::u32string::npos) const;
-    
+    // Python Style slice()
+    PString slice(int start = 0, int stop=-1, int step = 1) const;
     
 
     PString captilize() const;
@@ -136,6 +140,8 @@ public:
     
     const PString operator[](size_t index) const;
 
+    // Python-style slice
+    PString operator()(int start = 0, int stop = -1, int step = 1) const;
     
     PString operator+(const PString& other) const;
     PString operator+(char32_t other) const;

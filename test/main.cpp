@@ -220,6 +220,26 @@ int main(){
     
     cout << std::format("str_equal: {}",str_equal) << std::endl;
 
+    PString str_slice = "123456789";
+    cout << str_slice.toString() + "[1:5] = " << str_slice.slice(1,5).toString() << endl;
+    cout << str_slice.toString() + "[1:5] = " << str_slice(1,5).toString() << endl;
+    cout << str_slice.toString() + "[1:5:2] = " << str_slice.slice(1,5,2).toString() << endl;
+    cout << str_slice.toString() + "[1:5:2] = " << str_slice(1,5,2).toString() << endl;
+    cout << str_slice.toString() + "[:5] = " << str_slice.slice(0,5).toString() << endl;
+    cout << str_slice.toString() + "[:5] = " << str_slice(0,5).toString() << endl;
+    cout << str_slice.toString() + "[1:] = " << str_slice.slice(1).toString() << endl;
+    cout << str_slice.toString() + "[1:] = " << str_slice(1).toString() << endl;
+    cout << str_slice.toString() + "[:] = " << str_slice.slice().toString() << endl;
+    cout << str_slice.toString() + "[:] = " << str_slice().toString() << endl;
+    cout << str_slice.toString() + "[-1:] = " << str_slice.slice(-1).toString() << endl;
+    cout << str_slice.toString() + "[-1:] = " << str_slice(-1).toString() << endl;
+    cout << str_slice.toString() + "[-1:-5] = " << str_slice.slice(-1,-5).toString() << endl;
+    cout << str_slice.toString() + "[-1:-5] = " << str_slice(-1,-5).toString() << endl;
+    cout << str_slice.toString() + "[-1:-5:-1] = " << str_slice.slice(-1,-5,-1).toString() << endl;
+    cout << str_slice.toString() + "[-1:-5:-1] = " << str_slice(-1,-5,-1).toString() << endl;
+
+
+
     const_iter(str_equal);
 
     std::vector<PString> vec = {"a", "b", "c", "d", "e","aaa","abc","ce"};
