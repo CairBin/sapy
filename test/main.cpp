@@ -10,6 +10,7 @@
 #include "sapy/piterator.h"
 #include "sapy/pdict.h"
 #include "sapy/pset.h"
+#include "another.h"
 
 using namespace sapy;
 using namespace std;
@@ -513,6 +514,7 @@ int main(){
     if(!dict_bool){
         cout << "dict_bool:" + dict_bool.toString() + " is false" << endl;
     }
-
+	
+		another_func();
     return 0;
 }
