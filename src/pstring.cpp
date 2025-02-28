@@ -990,6 +990,11 @@ PString operator+(const std::string &lhs, const PString &rhs)
 }
 
 
-
+std::istream& operator>>(std::istream& is, PString& pstr){
+    std::string str;
+    is >> str;
+    pstr = PString(str);
+    return is;
+}
 
 } // namespace sapy

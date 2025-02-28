@@ -4,6 +4,7 @@
 #include <ostream>
 #include <memory>
 #include <format>
+#include <sstream>
 #include <cassert>
 #include "sapy/pstring.h"
 #include "sapy/plist.h"
@@ -238,7 +239,10 @@ int main(){
     cout << str_slice.toString() + "[-1:-5:-1] = " << str_slice.slice(-1,-5,-1).toString() << endl;
     cout << str_slice.toString() + "[-1:-5:-1] = " << str_slice(-1,-5,-1).toString() << endl;
 
-
+    PString str_sstream_in;  
+    std::stringstream ss("Hello,World!");
+    ss >> str_sstream_in;
+    cout << "str_sstream_in = " << str_sstream_in << endl;
 
     const_iter(str_equal);
 

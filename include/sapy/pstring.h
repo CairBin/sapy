@@ -179,6 +179,7 @@ public:
 
 private:
     virtual void _print(std::ostream& os) const override;
+    friend std::istream& operator>>(std::istream& is, PString& pstr);
     std::u32string _data;
 };
 
